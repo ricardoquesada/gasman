@@ -25,6 +25,7 @@ import soundex
 from box2d_callbacks import *
 from settings import fwSettings
 
+PTM_RATIO = 10
 
 class GameLayer(cocos.layer.Layer):
 
@@ -34,7 +35,14 @@ class GameLayer(cocos.layer.Layer):
         self.schedule( self.step )
 
         self.init_physics()
+        self.init_sprites()
 
+    def init_sprites( self ):
+
+        sprite = Sprite( 'pedoman-character.png' )
+        self.add( sprite )
+        sprite.position = (200,200)
+        self.pedoman_sprite = sprite
 
     def init_physics( self ):
         self.points             = []
@@ -48,7 +56,6 @@ class GameLayer(cocos.layer.Layer):
         self.worldAABB.lowerBound = (-200,-200)
         self.worldAABB.upperBound = (200,200)
         gravity = (0.0, -10.0)
-#        gravity = (0.0, 0.0)
 
         doSleep = True
         self.world = box2d.b2World(self.worldAABB, gravity, doSleep)
@@ -56,8 +63,16 @@ class GameLayer(cocos.layer.Layer):
         self.destructionListener = fwDestructionListener()
         self.boundaryListener = fwBoundaryListener()
         self.contactListener = fwContactListener()
-        self.debugDraw = fwDebugDraw(10)          # 1 meter == 32 pixels
+        self.debugDraw = fwDebugDraw(PTM_RATIO)          # 1 meter == 10 pixels
         self.debugDraw.batch = pyglet.graphics.Batch()
+    
+        self.destructionListener.test = self
+        self.boundaryListener.test = self
+        self.contactListener.test = self
+        
+        self.world.SetDestructionListener(self.destructionListener)
+        self.world.SetBoundaryListener(self.boundaryListener)
+        self.world.SetContactListener(self.contactListener)
 
         # Set the other settings that aren't contained in the flags
         self.world.SetWarmStarting(settings.enableWarmStarting)
@@ -77,6 +92,18 @@ class GameLayer(cocos.layer.Layer):
         self.debugDraw.SetFlags(flags)
 
         self.setup_physics_world()
+
+    # 
+    # callbacks
+    #
+    def BoundaryViolated(self, body):
+        self.destroyList.append(body)
+
+    def ShapeDestroyed(self, joint):
+        pass
+
+    def JointDestroyed(self, joint):
+        pass
 
     def setup_physics_world( self ):
         sd=box2d.b2PolygonDef() 
@@ -150,6 +177,20 @@ class GameLayer(cocos.layer.Layer):
             body.CreateShape(sd)
             body.SetMassFromShapes()
 
+        # create Pedo Man
+        bd = box2d.b2BodyDef()
+        bd.position = (20,20)
+        bd.angularDamping = 2.0
+        bd.linearDamping = 0.1
+        body = self.world.CreateBody(bd)
+        sd = box2d.b2CircleDef()
+        sd.density = 0.1 
+        sd.radius = 2.6
+        sd.friction = 0.95
+        sd.restitution = 0.7
+        body.CreateShape(sd)
+        body.SetMassFromShapes()
+        self.pedoman_body = body
 
     def step(self, dt):
         # Prepare for simulation. Typically we use a time step of 1/60 of a
@@ -161,6 +202,13 @@ class GameLayer(cocos.layer.Layer):
 
         # Instruct the world to perform a single step of simulation. It is
         # generally best to keep the time step and iterations fixed.
+
+#        if self.points:
+#            print self.points
+
+        # Reset the collision points
+        self.points = []
+
         self.world.Step(timeStep, vel_iters, pos_iters)
         self.world.Validate()
 
@@ -169,9 +217,23 @@ class GameLayer(cocos.layer.Layer):
             self.world.DestroyBody(obj)
         self.destroyList = []
 
+        # position
+        position = self.pedoman_body.position
+        position = (position.x * PTM_RATIO, position.y * PTM_RATIO)
+        self.pedoman_sprite.position = position
+
+        # angle
+        angle = self.pedoman_body.angle
+        angle = math.degrees( angle )
+        self.pedoman_sprite.rotation = -angle
+
     def draw( self ):
         super(GameLayer, self).draw()
+
+        glPushMatrix()
+        self.transform()
         self.debugDraw.batch.draw()
+        glPopMatrix()
 
         # clean used batch
 #        self.debugDraw.batch = pyglet.graphics.Batch()
@@ -188,45 +250,52 @@ class ControlLayer( cocos.layer.Layer ):
         self.keys_pressed = set()
 
     def update_keys(self):
-        v = euclid.Vector2( 0, 0)
-        
+       
+        torque = 0
         for key in self.keys_pressed:
             if key == LEFT:
-                v += (-1,0)
+                torque += 250
             elif key == RIGHT:
-                v += (1,0)
-            elif key == UP:
-                v += (0,1)
-            elif key == DOWN:
-                v += (0,-1)
+                torque -= 250
 
-        v = v.normalize()
-        v = v * 50
+            if torque != 0:
+                self.model.pedoman_body.ApplyTorque( torque )
+
+
+    def on_mouse_drag( self, x, y, dx, dy, buttons, modifiers ):
+        (x,y) = director.get_virtual_coordinates(x,y)
+        x,y = self.model.position
+        self.model.position = (x+dx, y+dy)
 
     def on_key_press (self, key, modifiers):
-        if state.state == state.STATE_PLAY:
-            if key in (LEFT, RIGHT, UP, DOWN):
-                self.keys_pressed.add(key)
-                self.update_keys()
-                return True 
+        if key == UP:
+            body = self.model.pedoman_body
+            f = (0.0, 25.0)
+            p = body.GetWorldPoint((0.0, 0.0))
+            angle = body.GetAngle()
+            angle = math.degrees( angle) % 360
+            body.ApplyImpulse(f, p)
+            return True
+        elif key in (LEFT, RIGHT):
+            self.keys_pressed.add(key)
+            self.update_keys()
+            return True 
         return False 
 
     def on_key_release (self, key, modifiers):
-        if state.state == state.STATE_PLAY:
-            if key in (LEFT, RIGHT, UP, DOWN):
-                try:
-                    self.keys_pressed.remove(key)
-                    self.update_keys()
-                except KeyError:
-                    self.keys_pressed = set()
-                return True 
+        if key in (LEFT, RIGHT):
+            try:
+                self.keys_pressed.remove(key)
+                self.update_keys()
+            except KeyError:
+                self.keys_pressed = set()
+            return True 
         return False 
 
     def on_text_motion(self, motion):
-        if state.state == state.STATE_PLAY:
-            if motion in ( MOTION_UP, MOTION_DOWN, MOTION_LEFT, MOTION_RIGHT ):
-                self.update_keys()
-                return True
+        if motion in ( MOTION_UP, MOTION_DOWN, MOTION_LEFT, MOTION_RIGHT ):
+            self.update_keys()
+            return True
         return False
 
 
