@@ -25,7 +25,9 @@ import soundex
 from box2d_callbacks import *
 from settings import fwSettings
 
-PTM_RATIO = 10
+PTM_RATIO = 52
+TORQUE_FORCE = 25
+JUMP_IMPULSE = 5
 
 class GameLayer(cocos.layer.Layer):
 
@@ -184,8 +186,8 @@ class GameLayer(cocos.layer.Layer):
         bd.linearDamping = 0.1
         body = self.world.CreateBody(bd)
         sd = box2d.b2CircleDef()
-        sd.density = 0.1 
-        sd.radius = 2.6
+        sd.density = 1.0
+        sd.radius = 0.5
         sd.friction = 0.95
         sd.restitution = 0.7
         body.CreateShape(sd)
@@ -254,9 +256,9 @@ class ControlLayer( cocos.layer.Layer ):
         torque = 0
         for key in self.keys_pressed:
             if key == LEFT:
-                torque += 250
+                torque += TORQUE_FORCE
             elif key == RIGHT:
-                torque -= 250
+                torque -= TORQUE_FORCE
 
             if torque != 0:
                 self.model.pedoman_body.ApplyTorque( torque )
@@ -270,10 +272,8 @@ class ControlLayer( cocos.layer.Layer ):
     def on_key_press (self, key, modifiers):
         if key == UP:
             body = self.model.pedoman_body
-            f = (0.0, 25.0)
+            f = (0.0, JUMP_IMPULSE)
             p = body.GetWorldPoint((0.0, 0.0))
-            angle = body.GetAngle()
-            angle = math.degrees( angle) % 360
             body.ApplyImpulse(f, p)
             return True
         elif key in (LEFT, RIGHT):
@@ -304,6 +304,7 @@ def get_game_scene():
 
     s = cocos.scene.Scene()
     gameModel = GameLayer()
+    gameModel.scale = 0.4
     s.add( gameModel, z=0 )
     s.add( ControlLayer( gameModel), z=0, name='ctrl' )
     return s
