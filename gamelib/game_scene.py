@@ -16,11 +16,17 @@ from cocos import euclid
 # box2d
 from Box2D import *
 
+# squirtle
+import squirtle
+import squirtle_cocos_adaptor as sqa
+
 # locals
 from primitives import *
 from state import state
 import levels
 import soundex
+import data
+import svg_box2d_parser
 
 from box2d_callbacks import *
 from settings import fwSettings
@@ -42,8 +48,15 @@ class GameLayer(cocos.layer.Layer):
         self.init_sounds()
         self.init_physics()
         self.init_sprites()
+        self.init_background()
         self.init_game_state()
 
+
+    #
+    # IMAGES
+    #
+    def init_background( self ):
+        self.background = squirtle.SVG( data.filepath("pedoman-character2.svg") )
 
     #
     # GAME STATE
@@ -66,10 +79,20 @@ class GameLayer(cocos.layer.Layer):
     # SPRITES
     #
     def init_sprites( self ):
-        sprite = Sprite( 'pedoman-character.png' )
+
+        sprite = sqa.SVG_CacheNode()
+        node= sqa.SVGnode( data.filepath("pedoman-character.svg") )
+        sprite.add(node)
+        self.add( sprite)
+
+#        sprite = Sprite( 'pedoman-character.png' )
+#        self.add( sprite )
+        self.pedoman_sprite = sprite
+
+        sprite = Sprite( 'pedowoman-character.png' )
         self.add( sprite )
         sprite.position = (200,200)
-        self.pedoman_sprite = sprite
+        self.pedowoman_sprite = sprite
 
     #
     # PHYSICS
@@ -137,81 +160,13 @@ class GameLayer(cocos.layer.Layer):
         pass
 
     def setup_physics_world( self ):
-        sd=box2d.b2PolygonDef() 
-        sd.SetAsBox(50.0, 20.0)
 
-        bd=box2d.b2BodyDef() 
-        bd.position = (0.0, -20.0)
-        ground = self.world.CreateBody(bd) 
-        ground.CreateShape(sd)
-
-        sd=box2d.b2PolygonDef() 
-        sd.SetAsBox(13.0, 0.25)
-
-        bd=box2d.b2BodyDef() 
-        bd.position = (-4.0, 22.0)
-        bd.angle = -0.25
-
-        ground = self.world.CreateBody(bd) 
-        ground.CreateShape(sd)
-
-        sd=box2d.b2PolygonDef() 
-        sd.SetAsBox(0.25, 1.0)
-
-        bd=box2d.b2BodyDef() 
-        bd.position = (10.5, 19.0)
-
-        ground = self.world.CreateBody(bd) 
-        ground.CreateShape(sd)
-
-        sd=box2d.b2PolygonDef() 
-        sd.SetAsBox(13.0, 0.25)
-
-        bd=box2d.b2BodyDef() 
-        bd.position = (4.0, 14.0)
-        bd.angle = 0.25
-
-        ground = self.world.CreateBody(bd) 
-        ground.CreateShape(sd)
-
-        sd=box2d.b2PolygonDef() 
-        sd.SetAsBox(0.25, 1.0)
-
-        bd=box2d.b2BodyDef() 
-        bd.position = (-10.5, 11.0)
-
-        ground = self.world.CreateBody(bd) 
-        ground.CreateShape(sd)
-
-        sd=box2d.b2PolygonDef() 
-        sd.SetAsBox(13.0, 0.25)
-
-        bd=box2d.b2BodyDef() 
-        bd.position = (-4.0, 6.0)
-        bd.angle = -0.25
-
-        ground = self.world.CreateBody(bd) 
-        ground.CreateShape(sd)
-
-        sd=box2d.b2PolygonDef() 
-        sd.SetAsBox(0.5, 0.5)
-        sd.density = 25.0
-
-        # falling boxes
-#        friction = [0.75, 0.5, 0.35, 0.1, 0.0]
-#
-#        for i in range(5):
-#            bd=box2d.b2BodyDef() 
-#            bd.position = (-15.0 + 4.0 * i, 28.0)
-#            body = self.world.CreateBody(bd) 
-#
-#            sd.friction = friction[i]
-#            body.CreateShape(sd)
-#            body.SetMassFromShapes()
+        parser = svg_box2d_parser.SVGBox2dParser( self.world, 'level0.svg', PTM_RATIO)
+        parser.parse()
 
         # create Pedo Man
         bd = box2d.b2BodyDef()
-        bd.position = (18,0)
+        bd.position = (15,1)
         bd.angularDamping = 2.0
         bd.linearDamping = 0.1
         body = self.world.CreateBody(bd)
@@ -228,7 +183,7 @@ class GameLayer(cocos.layer.Layer):
         # food places
         for i in range(10):
             bd = box2d.b2BodyDef()
-            bd.position = (i*1.5,0)
+            bd.position = (i*1.53,10)
             body = self.world.CreateBody(bd)
             sd = box2d.b2CircleDef()
             sd.density = 0.0000001
@@ -345,6 +300,8 @@ class GameLayer(cocos.layer.Layer):
         glPushMatrix()
         self.transform()
         self.debugDraw.batch.draw()
+
+        self.background.draw( *self.position )
         glPopMatrix()
 
         # clean used batch
@@ -419,6 +376,6 @@ def get_game_scene():
 
     s = cocos.scene.Scene()
     gameModel = GameLayer()
-    gameModel.scale = 0.4
+    gameModel.scale = 1
     s.add( gameModel, z=0 )
     return s
