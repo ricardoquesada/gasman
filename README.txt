@@ -33,3 +33,8 @@ z: fart
 LICENSE:
 
 GNU GPL v2
+
+
+CREDITS:
+    - Music: Michael Wehr http://www.jamendo.com/en/album/17703
+    - Fonts:

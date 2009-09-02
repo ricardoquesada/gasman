@@ -27,28 +27,57 @@ from settings import fwSettings
 
 PTM_RATIO = 52
 TORQUE_FORCE = 25
-JUMP_IMPULSE = 5
+JUMP_IMPULSE = 15
 
 class GameLayer(cocos.layer.Layer):
 
+    is_event_handler = True     #: enable pyglet's events
+   
     def __init__(self):
         super(GameLayer,self).__init__()
 
-        self.schedule( self.step )
+        self.schedule( self.main_loop)
 
+        self.init_events()
+        self.init_sounds()
         self.init_physics()
         self.init_sprites()
+        self.init_game_state()
 
+
+    #
+    # GAME STATE
+    #
+    def init_game_state( self ):
+        self.state = state
+
+    #
+    # SOUNDS
+    #
+    def init_sounds( self ):
+        self.sounds_coin = soundex.load('crunch_01.mp3')
+        self.sounds_powerup = soundex.load('powerup_01.wav')
+        self.sounds_fart = soundex.load('fart_01.mp3')
+
+        soundex.set_music('music_01.mp3')
+        soundex.play_music()
+
+    #
+    # SPRITES
+    #
     def init_sprites( self ):
         sprite = Sprite( 'pedoman-character.png' )
         self.add( sprite )
         sprite.position = (200,200)
         self.pedoman_sprite = sprite
 
+    #
+    # PHYSICS
+    #
     def init_physics( self ):
         self.points             = []
         self.destroyList        = []
-        self.shitting_places    = []
+        self.food_places    = []
         settings = fwSettings
 
         # Box2D Initialization
@@ -96,7 +125,7 @@ class GameLayer(cocos.layer.Layer):
         self.setup_physics_world()
 
     # 
-    # callbacks
+    # physics callbacks
     #
     def BoundaryViolated(self, body):
         self.destroyList.append(body)
@@ -196,7 +225,7 @@ class GameLayer(cocos.layer.Layer):
         self.pedoman_body = body
 
 
-        # shitting places
+        # food places
         for i in range(10):
             bd = box2d.b2BodyDef()
             bd.position = (i*1.5,0)
@@ -208,10 +237,12 @@ class GameLayer(cocos.layer.Layer):
             sd.restitution = 0.00001
             body.CreateShape(sd)
             body.SetMassFromShapes()
-            self.shitting_places.append( body )
+            self.food_places.append( body )
 
-    def step(self, dt):
-
+    #
+    # MAIN LOOP
+    #
+    def main_loop(self, dt):
         #
         # check collision detection
         #
@@ -253,28 +284,43 @@ class GameLayer(cocos.layer.Layer):
         body_pairs = [(p.shape1.GetBody(), p.shape2.GetBody()) for p in self.points]
         
         for body1, body2 in body_pairs:
-            if ( (body1 in self.shitting_places or body2 in self.shitting_places) and \
+            if ( (body1 in self.food_places or body2 in self.food_places) and \
                 (body1 == self.pedoman_body or body2 == self.pedoman_body ) ):
-                    shape = self.pedoman_body.shapeList[0]
+                    self.food_eat( body1, body2 )
 
-                    # new radius
-                    sd = box2d.b2CircleDef()
-                    sd.density = 1.0
-                    sd.radius = shape.GetRadius() + 0.05
-                    sd.friction = 0.95
-                    sd.restitution = 0.7
-                    self.pedoman_body.CreateShape(sd)
+
+    def food_eat( self, body1, body2 ):
+        shape = self.pedoman_body.shapeList[0]
+
+        # destroy food
+        food_body = body1
+        if body2 in self.food_places:
+            food_body = body2
+        self.destroyList.append( food_body )
+        self.food_places.remove( food_body )
+
+        self.state.coins += 1
+
+        if self.state.coins % 10 == 0:
+            self.sounds_powerup.play()
+            self.state.farts += 1
+
+            # new radius
+            sd = box2d.b2CircleDef()
+            sd.density = 1.0
+            sd.radius = shape.GetRadius() + 0.5
+            sd.friction = 0.95
+            sd.restitution = 0.7
+            self.pedoman_body.CreateShape(sd)
 #                    self.pedoman_body.SetMassFromShapes()
 
-                    # destroy old shape
-                    self.pedoman_body.DestroyShape( shape )
+            # destroy old shape
+            self.pedoman_body.DestroyShape( shape )
 
-                    # destroy shitting
-                    shit_body = body1
-                    if body2 in self.shitting_places:
-                        shit_body = body2
-                    self.destroyList.append( shit_body )
-                    self.shitting_places.remove( shit_body )
+        else:
+            self.sounds_coin.play()
+
+                    
 
     def update_sprite_positions( self ):
         # position
@@ -289,6 +335,10 @@ class GameLayer(cocos.layer.Layer):
         angle = math.degrees( angle )
         self.pedoman_sprite.rotation = -angle
 
+
+    #
+    # DRAW
+    #
     def draw( self ):
         super(GameLayer, self).draw()
 
@@ -298,21 +348,15 @@ class GameLayer(cocos.layer.Layer):
         glPopMatrix()
 
         # clean used batch
-#        self.debugDraw.batch = pyglet.graphics.Batch()
         self.debugDraw.batch = pyglet.graphics.Batch()
 
-class ControlLayer( cocos.layer.Layer ):
-
-    is_event_handler = True     #: enable pyglet's events
-   
-    def __init__(self, model):
-        super(ControlLayer,self).__init__()
-        self.model = model
-
+    #
+    # EVENTS
+    #
+    def init_events( self ):
         self.keys_pressed = set()
 
     def update_keys(self):
-       
         torque = 0
         for key in self.keys_pressed:
             if key == LEFT:
@@ -321,20 +365,19 @@ class ControlLayer( cocos.layer.Layer ):
                 torque -= TORQUE_FORCE
 
             if torque != 0:
-                self.model.pedoman_body.ApplyTorque( torque )
-
-
-    def on_mouse_drag( self, x, y, dx, dy, buttons, modifiers ):
-        (x,y) = director.get_virtual_coordinates(x,y)
-        x,y = self.model.position
-        self.model.position = (x+dx, y+dy)
+                self.pedoman_body.ApplyTorque( torque )
 
     def on_key_press (self, key, modifiers):
-        if key == UP:
-            body = self.model.pedoman_body
-            f = (0.0, JUMP_IMPULSE)
-            p = body.GetWorldPoint((0.0, 0.0))
-            body.ApplyImpulse(f, p)
+        if key == Z:
+            if self.state.farts > 0 :
+                self.state.farts -= 1
+                self.state.player_state = state.PLAYER_FARTING
+                body = self.pedoman_body
+#                f = (0.0, JUMP_IMPULSE)
+                f = body.GetWorldVector((0.0, JUMP_IMPULSE))
+                p = body.GetWorldPoint((0.0, 0.0))
+                body.ApplyImpulse(f, p)
+                self.sounds_fart.play()
             return True
         elif key in (LEFT, RIGHT):
             self.keys_pressed.add(key)
@@ -358,6 +401,18 @@ class ControlLayer( cocos.layer.Layer ):
             return True
         return False
 
+    def on_mouse_drag( self, x, y, dx, dy, buttons, modifiers ):
+        (x,y) = director.get_virtual_coordinates(x,y)
+        x,y = self.position
+        self.position = (x+dx, y+dy)
+
+    def on_mouse_scroll( self, x, y, dx, dy ):
+        if dy > 0:
+            diff = 1.1
+        else:
+            diff = 0.9
+        self.scale *= diff
+
 
 def get_game_scene():
     state.reset()
@@ -366,5 +421,4 @@ def get_game_scene():
     gameModel = GameLayer()
     gameModel.scale = 0.4
     s.add( gameModel, z=0 )
-    s.add( ControlLayer( gameModel), z=0, name='ctrl' )
     return s
