@@ -25,12 +25,20 @@ class ScoreLayer( Layer ):
         self.score.position=(0,0)
         self.add( self.score)
 
+        self.farts = Label('Farts:', font_size=36,
+                font_name='Edit Undo Line BRK',
+                color=(255,255,255,255),
+                anchor_x='left',
+                anchor_y='bottom')
+        self.farts.position=(250,0)
+        self.add( self.farts)
+
         self.time= Label('time:', font_size=36,
                 font_name='Edit Undo Line BRK',
                 color=(255,255,255,255),
                 anchor_x='left',
                 anchor_y='bottom')
-        self.time.position=(245,0)
+        self.time.position=(480,0)
         self.add( self.time)
 
         self.lvl=  Label('Lvl:', font_size=36,
@@ -38,14 +46,14 @@ class ScoreLayer( Layer ):
                 color=(255,255,255,255),
                 anchor_x='left',
                 anchor_y='bottom')
-
-        self.lvl.position=(480,0)
+        self.lvl.position=(660,0)
         self.add( self.lvl)
 
     def draw(self):
         super( ScoreLayer, self).draw()
         self.score.element.text = 'Score:%d' % state.score 
         self.time.element.text = 'time:%d' % state.time
+        self.farts.element.text = 'Farts:%d' % state.farts
 
         lvl = state.level_idx or 0
         self.lvl.element.text = 'Lvl:%d' % lvl
@@ -94,3 +102,9 @@ class HUD( Layer ):
 
     def show_message( self, msg, callback = None ):
         self.get('msg').show_message( msg, callback )
+
+    def level_complete( self ):
+        self.show_message('WELL DONE!')
+
+    def level_over( self ):
+        self.show_message('GAME OVER')

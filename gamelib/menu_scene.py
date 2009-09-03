@@ -23,6 +23,7 @@ from pyglet.window import key
 import soundex
 import state
 import levels
+import hiscore
 
 FONT_NAME = "Denne's Aliens"
 
@@ -41,14 +42,14 @@ class TitleLayer( Layer ):
         self.font_title['color'] = COLOR_WHITE
         self.font_title['anchor_y'] ='top'
         self.font_title['anchor_x'] ='right'
-        title = Label('A LOVE STORY', **self.font_title )
+        title = Label('A COMPLEX LOVE STORY', **self.font_title )
         title.position=(w-10,30)
         self.add(title,z=1)
 
-        self.font_title['color'] = COLOR_WHITE
-        title = Label('A LOVE STORY', **self.font_title )
-        title.position=(w-12,32)
-        self.add(title,z=0)
+#        self.font_title['color'] = COLOR_WHITE
+#        title = Label('A LOVE STORY', **self.font_title )
+#        title.position=(w-12,32)
+#        self.add(title,z=0)
 
 class ScoresLayer( ColorLayer):
 

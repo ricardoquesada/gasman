@@ -28,6 +28,7 @@ import soundex
 import data
 import svg_box2d_parser
 import HUD
+import gameover
 from box2d_callbacks import *
 from settings import fwSettings
 
@@ -43,6 +44,7 @@ class GameLayer(cocos.layer.Layer):
         super(GameLayer,self).__init__()
 
         self.schedule( self.main_loop)
+        self.schedule_interval( self.show_level, 0.5 )
 
         self.init_game_state()
         self.init_events()
@@ -51,6 +53,12 @@ class GameLayer(cocos.layer.Layer):
         self.init_physics()
         self.init_background()
 
+        self.HUD_delegate = None
+
+    def show_level( self, dt ):
+        self.unschedule( self.show_level )
+        self.HUD_delegate.show_message('LEVEL %d' % self.state.level_idx)
+        self.state.state = state.STATE_PLAY
 
     #
     # IMAGES
@@ -71,7 +79,8 @@ class GameLayer(cocos.layer.Layer):
         self.sounds_coin = soundex.load('sounds/crunch_01.mp3')
         self.sounds_powerup = soundex.load('sounds/powerup_01.wav')
         self.sounds_fart = soundex.load('sounds/fart_01.mp3')
-        self.sounds_level_complete = soundex.load('sounds/level_complete_01.wav')
+        self.sounds_level_complete = soundex.load('sounds/level_complete_01.mp3')
+        self.sounds_level_over = soundex.load('sounds/game_over_01.mp3')
 
         soundex.set_music('music_01.mp3')
         soundex.play_music()
@@ -99,7 +108,8 @@ class GameLayer(cocos.layer.Layer):
     def init_physics( self ):
         self.points             = []
         self.destroyList        = []
-        self.food_places    = []
+        self.food_places        = []
+        self.deadly_places      = []
         settings = fwSettings
 
         # Box2D Initialization
@@ -195,6 +205,10 @@ class GameLayer(cocos.layer.Layer):
                     self.gaswoman_body = body
                     body.userData = self.gaswoman_sprite
 
+                elif value=='game_over':
+                    self.deadly_places.append( body )
+
+
     def setup_physics_world( self ):
 
         level_name = "levels/level%d.svg" % self.state.level_idx
@@ -282,11 +296,21 @@ class GameLayer(cocos.layer.Layer):
                 (body1 == self.gasman_body or body2 == self.gasman_body ) ):
                     self.food_eat( body1, body2 )
             elif ( self.gasman_body in pair and self.gaswoman_body in pair):
-                self.level_complete()
+                self.collision_gasman_gaswoman()
+            elif ( self.gasman_body in pair and (body1 in self.deadly_places or body2 in self.deadly_places ) ):
+                self.collision_gasman_deadly()
 
-    def level_complete( self ):
-        soundex.play('sounds/level_complete_01.wav')
-        print 'level complete'
+    def collision_gasman_gaswoman( self ):
+        if self.state.state == state.STATE_PLAY:
+            self.state.state = state.STATE_WIN
+            self.sounds_level_complete.play()
+            self.HUD_delegate.level_complete()
+            self.schedule_interval( self.level_next_async, 1.5 )
+
+    def collision_gasman_deadly( self ):
+        if self.state.state == state.STATE_PLAY:
+            self.state.state = state.STATE_OVER
+            self.parent.add( gameover.GameOver( win=False) , z=10 )
 
     def food_eat( self, body1, body2 ):
         shape = self.gasman_body.shapeList[0]
@@ -302,21 +326,23 @@ class GameLayer(cocos.layer.Layer):
 
         self.state.coins += 1
 
+        self.state.score += 1
+
         if self.state.coins % 3 == 0:
             self.sounds_powerup.play()
             self.state.farts += 1
 
             # new radius
-            sd = box2d.b2CircleDef()
-            sd.density = shape.density
-            sd.radius = shape.GetRadius() + 0.2
-            sd.friction = shape.friction
-            sd.restitution = shape.restitution
-            self.gasman_body.CreateShape(sd)
-#                    self.gasman_body.SetMassFromShapes()
+#            sd = box2d.b2CircleDef()
+#            sd.density = shape.density
+#            sd.radius = shape.GetRadius() + 0.2
+#            sd.friction = shape.friction
+#            sd.restitution = shape.restitution
+#            self.gasman_body.CreateShape(sd)
+#            self.gasman_body.SetMassFromShapes()
 
             # destroy old shape
-            self.gasman_body.DestroyShape( shape )
+#            self.gasman_body.DestroyShape( shape )
 
         else:
             self.sounds_coin.play()
@@ -375,21 +401,21 @@ class GameLayer(cocos.layer.Layer):
                 self.gasman_body.ApplyTorque( torque )
 
     def on_key_press (self, key, modifiers):
-        if key == Z:
-            if self.state.farts > 0 :
-                self.state.farts -= 1
-                self.state.player_state = state.PLAYER_FARTING
-                body = self.gasman_body
+        if self.state.state == state.STATE_PLAY:
+            if key == UP or key == SPACE:
+                if self.state.farts > 0 :
+                    self.state.farts -= 1
+                    body = self.gasman_body
 #                f = (0.0, JUMP_IMPULSE)
-                f = body.GetWorldVector((0.0, JUMP_IMPULSE))
-                p = body.GetWorldPoint((0.0, 0.0))
-                body.ApplyImpulse(f, p)
-                self.sounds_fart.play()
-            return True
-        elif key in (LEFT, RIGHT):
-            self.keys_pressed.add(key)
-            self.update_keys()
-            return True 
+                    f = body.GetWorldVector((0.0, JUMP_IMPULSE))
+                    p = body.GetWorldPoint((0.0, 0.0))
+                    body.ApplyImpulse(f, p)
+                    self.sounds_fart.play()
+                return True
+            elif key in (LEFT, RIGHT):
+                self.keys_pressed.add(key)
+                self.update_keys()
+                return True 
         return False 
 
     def on_key_release (self, key, modifiers):
@@ -403,9 +429,10 @@ class GameLayer(cocos.layer.Layer):
         return False 
 
     def on_text_motion(self, motion):
-        if motion in ( MOTION_UP, MOTION_DOWN, MOTION_LEFT, MOTION_RIGHT ):
-            self.update_keys()
-            return True
+        if self.state.state == state.STATE_PLAY:
+            if motion in ( MOTION_UP, MOTION_DOWN, MOTION_LEFT, MOTION_RIGHT ):
+                self.update_keys()
+                return True
         return False
 
     def on_mouse_drag( self, x, y, dx, dy, buttons, modifiers ):
@@ -420,16 +447,39 @@ class GameLayer(cocos.layer.Layer):
             diff = 0.9
         self.scale *= diff
 
+    #
+    # level management
+    #
+    def level_new( self ):
+        scene = self.parent
+        hud = scene.get('hud')
+        scene.remove( 'ctrl' )
+        gameModel = GameLayer()
+        gameModel.HUD_delegate = hud
+        scene.add( gameModel, z=1, name='ctrl')
+
+    def level_restart( self ):
+        state.reset()
+        self.level_new()
+
+    def level_next( self ):
+        state.level_idx += 1
+        self.level_new()
+
+    def level_next_async( self, dt ):
+        self.unschedule( self.level_next_async )
+        self.level_next()
 
 def get_game_scene():
     state.reset()
 
     s = cocos.scene.Scene()
     gameModel = GameLayer()
-    gameModel.scale = 1
-    s.add( gameModel, z=1 )
+    s.add( gameModel, z=1, name='ctrl')
 
     hud = HUD.HUD()
-    s.add( hud, z=10 )
+    s.add( hud, z=10, name='hud' )
+
+    gameModel.HUD_delegate = hud
 
     return s
