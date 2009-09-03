@@ -83,8 +83,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="343.87731"
-     inkscape:cy="218.03998"
+     inkscape:cx="463.87731"
+     inkscape:cy="178.03998"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -184,12 +184,12 @@
        game_data="sprite=gaswoman"
        transform="matrix(0.89865538,0,0,0.85051312,-428.11566,-89.67446)" />
     <rect
-       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:7.18806648;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3133"
-       width="339"
-       height="34"
-       x="250"
-       y="603"
+       width="748.81195"
+       height="31.811932"
+       x="52.094032"
+       y="604.09406"
        game_data="sprite=game_over" />
     <rect
        style="fill:#ffcc00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3.95910406;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
