@@ -11,14 +11,16 @@ from xml.dom.minidom import parse, parseString
 
 class SVGBox2dParser( object ):
 
-    def __init__( self, world, level, ratio=52 ):
+    def __init__( self, world, level, ratio=52, callback=None ):
         self.world = world
         self.level = level
         self.ratio = ratio
+        self.callback = callback
 
         self.svg_size = b2Vec2(0,0)
 
 
+        self.current_body = None
         self.static_physics = True
 #        self.transform = squirtle.Matrix([1,0,0,-1,0,0])
         self.transform = squirtle.Matrix([1,0,0,1,0,0])
@@ -58,12 +60,16 @@ class SVGBox2dParser( object ):
 
     def parse_elements( self, group ):
         for child in group.childNodes:
-            if child.nodeName == 'rect':
-                self.parse_rect( child )
-            elif child.nodeName == 'path':
-                self.parse_path( child )
-            elif child.nodeName == 'g':
-                self.parse_group( child )
+            body = None
+            supported = ['rect','path','g']
+            if child.nodeName in supported:
+                if child.nodeName == 'rect':
+                    body = self.parse_rect( child )
+                elif child.nodeName == 'path':
+                    body = self.parse_path( child )
+                elif child.nodeName == 'g':
+                    body = self.parse_group( child )
+                self.apply_callback( child, body )
 
     def parse_rect( self, node ):
         width = float( node.getAttribute('width') )
@@ -103,17 +109,21 @@ class SVGBox2dParser( object ):
 
         sd=b2PolygonDef()
         sd.SetAsBox(width/2,height/2,(width/2,height/2),0)
+        self.apply_physics_properties_to_shape( node, sd ) 
 
-        bd=b2BodyDef()
-        bd.angle = -angle
-        bd.position = b2Vec2(rel_pos.x, rel_pos.y)
-#        bd.position = b2Vec2(rel_pos.x + width/2, rel_pos.y+height/2)
-#        bd.position = b2Vec2(0,0)
-        body = self.world.CreateBody(bd)
+        if not self.current_body:
+            bd = b2BodyDef()
+            bd.angle = -angle
+            bd.position = b2Vec2(rel_pos.x, rel_pos.y)
+            body = self.world.CreateBody(bd)
+        else:
+            body = self.current_body
+
         body.CreateShape(sd)
 
-        if not self.static_physics:
-            body.SetMassFromShapes()
+        self.apply_physics_properties_to_body( body ) 
+
+        return body
 
     def parse_path( self, node ):
         subtype = node.getAttribute('sodipodi:type')
@@ -139,16 +149,72 @@ class SVGBox2dParser( object ):
 
             sd=b2CircleDef()
             sd.radius = radius
-            bd=b2BodyDef()
-            bd.position = rel_pos
-            body = self.world.CreateBody(bd)
+            self.apply_physics_properties_to_shape( node, sd ) 
+            if not self.current_body:
+                bd=b2BodyDef()
+                bd.position = rel_pos
+                body = self.world.CreateBody(bd)
+            else:
+                body = self.current_body
             body.CreateShape(sd)
+            self.apply_physics_properties_to_body( body )
+
+        return body
 
     def parse_group( self, node ):
-        pass
+        transform = node.getAttribute('transform')
+        matrix = self.parse_transform( transform )
+
+        old_transform = self.transform
+        self.transform = self.transform * matrix
+
+        bd = b2BodyDef()
+        bd.position = b2Vec2( self.transform.values[4], self.transform.values[5] )
+        self.current_body = self.world.CreateBody(bd)
+
+        self.parse_elements( node )
+
+        self.current_body = None
+
+        self.transform = old_transform
+
+        return self.current_body
 
 
     def parse_transform( self, s ):
         s = str(s)
         matrix = squirtle.Matrix( s )
         return matrix
+
+    def apply_physics_properties_to_shape( self, node, shape ):
+
+        restitution = node.getAttribute('physics_restitution')
+        if restitution:
+            restitution = float( restitution )
+        else:
+            restitution = 0
+
+        density = node.getAttribute('physics_density')
+        if density:
+            density = float( density )
+        else:
+            density = 1
+
+        friction = node.getAttribute('physics_friction')
+        if friction:
+            friction = float( friction )
+        else:
+            friction = 1
+
+        shape.restitution =  restitution
+        shape.density = density
+        shape.friction = friction
+
+    def apply_physics_properties_to_body( self, body ):
+        if not self.static_physics:
+            body.SetMassFromShapes()
+
+    def apply_callback( self, node, body ):
+        game_data = node.getAttribute('game_data')
+        if game_data and self.callback:
+            self.callback( body, game_data )

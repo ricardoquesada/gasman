@@ -159,9 +159,18 @@ class GameLayer(cocos.layer.Layer):
     def JointDestroyed(self, joint):
         pass
 
+
+    def physics_game_cb(self, body, values):
+
+        list_values = values.split(',')
+        for keypair in list_values:
+            key,value = keypair.split('=')
+            if key=='sprite' and value=='food':
+                self.food_places.append( body )
+
     def setup_physics_world( self ):
 
-        parser = svg_box2d_parser.SVGBox2dParser( self.world, 'level0.svg', PTM_RATIO)
+        parser = svg_box2d_parser.SVGBox2dParser( self.world, 'level0.svg', ratio=PTM_RATIO, callback=self.physics_game_cb)
         parser.parse()
 
         # create Pedo Man
@@ -181,18 +190,18 @@ class GameLayer(cocos.layer.Layer):
 
 
         # food places
-        for i in range(10):
-            bd = box2d.b2BodyDef()
-            bd.position = (i*1.53,10)
-            body = self.world.CreateBody(bd)
-            sd = box2d.b2CircleDef()
-            sd.density = 0.0000001
-            sd.radius = 0.5
-            sd.friction = 0.00001
-            sd.restitution = 0.00001
-            body.CreateShape(sd)
-            body.SetMassFromShapes()
-            self.food_places.append( body )
+#        for i in range(10):
+#            bd = box2d.b2BodyDef()
+#            bd.position = (i*1.53,10)
+#            body = self.world.CreateBody(bd)
+#            sd = box2d.b2CircleDef()
+#            sd.density = 0.0000001
+#            sd.radius = 0.5
+#            sd.friction = 0.00001
+#            sd.restitution = 0.00001
+#            body.CreateShape(sd)
+#            body.SetMassFromShapes()
+#            self.food_places.append( body )
 
     #
     # MAIN LOOP
