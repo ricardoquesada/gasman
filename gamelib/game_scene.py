@@ -31,7 +31,7 @@ import HUD
 from box2d_callbacks import *
 from settings import fwSettings
 
-PTM_RATIO = 52
+PTM_RATIO = 30
 TORQUE_FORCE = 25
 JUMP_IMPULSE = 15
 
@@ -166,9 +166,27 @@ class GameLayer(cocos.layer.Layer):
             if key=='sprite':
                 if value=='food':
                     self.food_places.append( body )
+                    shape = body.shapeList[0]
+                    body.DestroyShape(shape)
+                    sd = box2d.b2CircleDef()
+                    sd.radius = 0.2
+                    sd.isSensor = True
+                    body.CreateShape(sd)
+                    body.SetMassFromShapes()
+
                 elif value=='gasman':
                     self.gasman_body = body
                     body.userData = self.gasman_sprite
+                    shape = body.shapeList[0]
+                    body.DestroyShape(shape)
+                    sd = box2d.b2CircleDef()
+                    sd.radius = 0.7
+                    sd.density = 1
+                    sd.friction = 1
+                    sd.restitution = 0.2
+                    body.CreateShape(sd)
+                    body.SetMassFromShapes()
+
                 elif value=='gaswoman':
                     self.gaswoman_body = body
                     body.userData = self.gaswoman_sprite

@@ -11,7 +11,7 @@ from xml.dom.minidom import parse, parseString
 
 class SVGBox2dParser( object ):
 
-    def __init__( self, world, level, ratio=52, callback=None ):
+    def __init__( self, world, level, ratio=30, callback=None ):
         self.world = world
         self.level = level
         self.ratio = ratio
@@ -194,23 +194,23 @@ class SVGBox2dParser( object ):
         if restitution:
             restitution = float( restitution )
         else:
-            restitution = 0.5
+            restitution = 0.2
+        shape.restitution =  restitution
 
         density = node.getAttribute('physics_density')
         if density:
             density = float( density )
         else:
             density = 1
+        shape.density = density
 
         friction = node.getAttribute('physics_friction')
         if friction:
             friction = float( friction )
         else:
-            friction = 0.8
-
-        shape.restitution =  restitution
-        shape.density = density
+            friction = 1
         shape.friction = friction
+
 
     def apply_physics_properties_to_body( self, body ):
         if not self.static_physics:
