@@ -31,9 +31,9 @@ import HUD
 from box2d_callbacks import *
 from settings import fwSettings
 
-PTM_RATIO = 30
-TORQUE_FORCE = 25
-JUMP_IMPULSE = 15
+PTM_RATIO = 52
+TORQUE_FORCE = 20
+JUMP_IMPULSE = 10
 
 class GameLayer(cocos.layer.Layer):
 
@@ -44,19 +44,19 @@ class GameLayer(cocos.layer.Layer):
 
         self.schedule( self.main_loop)
 
+        self.init_game_state()
         self.init_events()
         self.init_sounds()
         self.init_sprites()
         self.init_physics()
         self.init_background()
-        self.init_game_state()
 
 
     #
     # IMAGES
     #
     def init_background( self ):
-        self.background = squirtle.SVG( data.filepath("gasman-character2.svg") )
+        self.background = squirtle.SVG( data.filepath("sprites/gasman-character2.svg") )
 
     #
     # GAME STATE
@@ -68,9 +68,10 @@ class GameLayer(cocos.layer.Layer):
     # SOUNDS
     #
     def init_sounds( self ):
-        self.sounds_coin = soundex.load('crunch_01.mp3')
-        self.sounds_powerup = soundex.load('powerup_01.wav')
-        self.sounds_fart = soundex.load('fart_01.mp3')
+        self.sounds_coin = soundex.load('sounds/crunch_01.mp3')
+        self.sounds_powerup = soundex.load('sounds/powerup_01.wav')
+        self.sounds_fart = soundex.load('sounds/fart_01.mp3')
+        self.sounds_level_complete = soundex.load('sounds/level_complete_01.wav')
 
         soundex.set_music('music_01.mp3')
         soundex.play_music()
@@ -81,13 +82,13 @@ class GameLayer(cocos.layer.Layer):
     def init_sprites( self ):
 
         sprite = sqa.SVG_CacheNode()
-        node= sqa.SVGnode( data.filepath("gasman-character.svg") )
+        node= sqa.SVGnode( data.filepath("sprites/gasman-character.svg") )
         sprite.add(node)
         self.add( sprite)
         self.gasman_sprite = sprite
 
         sprite = sqa.SVG_CacheNode()
-        node= sqa.SVGnode( data.filepath("gaswoman-character.svg") )
+        node= sqa.SVGnode( data.filepath("sprites/gaswoman-character.svg") )
         sprite.add(node)
         self.add( sprite)
         self.gaswoman_sprite = sprite
@@ -105,8 +106,8 @@ class GameLayer(cocos.layer.Layer):
 
         win_size = director.get_window_size()
         self.worldAABB = box2d.b2AABB()
-        self.worldAABB.lowerBound = (-200,-200)
-        self.worldAABB.upperBound = (200,200)
+        self.worldAABB.lowerBound = (-30,-30)
+        self.worldAABB.upperBound = (45,41)
         gravity = (0.0, -10.0)
 
         doSleep = True
@@ -173,6 +174,9 @@ class GameLayer(cocos.layer.Layer):
                     sd.isSensor = True
                     body.CreateShape(sd)
                     body.SetMassFromShapes()
+                    sprite = Sprite('sprites/bean-man.png')
+                    self.add( sprite )
+                    body.userData = sprite
 
                 elif value=='gasman':
                     self.gasman_body = body
@@ -180,7 +184,7 @@ class GameLayer(cocos.layer.Layer):
                     shape = body.shapeList[0]
                     body.DestroyShape(shape)
                     sd = box2d.b2CircleDef()
-                    sd.radius = 0.7
+                    sd.radius = 0.5
                     sd.density = 1
                     sd.friction = 1
                     sd.restitution = 0.2
@@ -193,7 +197,8 @@ class GameLayer(cocos.layer.Layer):
 
     def setup_physics_world( self ):
 
-        parser = svg_box2d_parser.SVGBox2dParser( self.world, 'level0.svg', ratio=PTM_RATIO, callback=self.physics_game_cb)
+        level_name = "levels/level%d.svg" % self.state.level_idx
+        parser = svg_box2d_parser.SVGBox2dParser( self.world, level_name, ratio=PTM_RATIO, callback=self.physics_game_cb)
         parser.parse()
 
         # create Gas Man
@@ -280,6 +285,7 @@ class GameLayer(cocos.layer.Layer):
                 self.level_complete()
 
     def level_complete( self ):
+        soundex.play('sounds/level_complete_01.wav')
         print 'level complete'
 
     def food_eat( self, body1, body2 ):
@@ -289,21 +295,23 @@ class GameLayer(cocos.layer.Layer):
         food_body = body1
         if body2 in self.food_places:
             food_body = body2
+
+        self.remove( food_body.userData )
         self.destroyList.append( food_body )
         self.food_places.remove( food_body )
 
         self.state.coins += 1
 
-        if self.state.coins % 10 == 0:
+        if self.state.coins % 3 == 0:
             self.sounds_powerup.play()
             self.state.farts += 1
 
             # new radius
             sd = box2d.b2CircleDef()
-            sd.density = 1.0
-            sd.radius = shape.GetRadius() + 0.5
-            sd.friction = 0.95
-            sd.restitution = 0.7
+            sd.density = shape.density
+            sd.radius = shape.GetRadius() + 0.2
+            sd.friction = shape.friction
+            sd.restitution = shape.restitution
             self.gasman_body.CreateShape(sd)
 #                    self.gasman_body.SetMassFromShapes()
 

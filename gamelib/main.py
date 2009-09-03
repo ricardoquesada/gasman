@@ -21,6 +21,7 @@ def main():
     pyglet.resource.path.append('data')
     pyglet.resource.reindex()
     font.add_directory('data')
+    font.add_directory('data/fonts')
 
     director.init( width=800, height=600)
     director.set_depth_test(True)

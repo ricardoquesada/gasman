@@ -39,7 +39,7 @@ class State( object ):
     def reset( self ):
         self.score = 0
         self.level = None
-        self.level_idx = None
+        self.level_idx = 0
         self.state = self.STATE_PAUSE
         self.coins = 0
 

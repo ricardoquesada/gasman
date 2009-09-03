@@ -158,7 +158,7 @@ class ScoresLayer( ColorLayer):
 class OptionsMenu( Menu ):
     def __init__(self):
         super( OptionsMenu, self).__init__('GAS MAN') 
-        self.select_sound = soundex.load('move.mp3')
+        self.select_sound = soundex.load('sounds/move.mp3')
 
         # you can override the font that will be used for the title and the items
         self.font_title['font_name'] = FONT_NAME
@@ -237,7 +237,7 @@ class MainMenu( Menu ):
     def __init__(self):
         super( MainMenu, self).__init__('GAS MAN') 
 
-        self.select_sound = soundex.load('move.mp3')
+        self.select_sound = soundex.load('sounds/move.mp3')
 
         # you can override the font that will be used for the title and the items
         # you can also override the font size and the colors. see menu.py for
