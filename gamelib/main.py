@@ -25,6 +25,6 @@ def main():
     director.init( width=800, height=600)
     director.set_depth_test(True)
 
-#    s = get_menu_scene()
-    s = get_game_scene()
+    s = get_menu_scene()
+#    s = get_game_scene()
     director.run (s)

@@ -27,7 +27,7 @@ import levels
 import soundex
 import data
 import svg_box2d_parser
-
+import HUD
 from box2d_callbacks import *
 from settings import fwSettings
 
@@ -46,8 +46,8 @@ class GameLayer(cocos.layer.Layer):
 
         self.init_events()
         self.init_sounds()
-        self.init_physics()
         self.init_sprites()
+        self.init_physics()
         self.init_background()
         self.init_game_state()
 
@@ -56,7 +56,7 @@ class GameLayer(cocos.layer.Layer):
     # IMAGES
     #
     def init_background( self ):
-        self.background = squirtle.SVG( data.filepath("pedoman-character2.svg") )
+        self.background = squirtle.SVG( data.filepath("gasman-character2.svg") )
 
     #
     # GAME STATE
@@ -81,18 +81,16 @@ class GameLayer(cocos.layer.Layer):
     def init_sprites( self ):
 
         sprite = sqa.SVG_CacheNode()
-        node= sqa.SVGnode( data.filepath("pedoman-character.svg") )
+        node= sqa.SVGnode( data.filepath("gasman-character.svg") )
         sprite.add(node)
         self.add( sprite)
+        self.gasman_sprite = sprite
 
-#        sprite = Sprite( 'pedoman-character.png' )
-#        self.add( sprite )
-        self.pedoman_sprite = sprite
-
-        sprite = Sprite( 'pedowoman-character.png' )
-        self.add( sprite )
-        sprite.position = (200,200)
-        self.pedowoman_sprite = sprite
+        sprite = sqa.SVG_CacheNode()
+        node= sqa.SVGnode( data.filepath("gaswoman-character.svg") )
+        sprite.add(node)
+        self.add( sprite)
+        self.gaswoman_sprite = sprite
 
     #
     # PHYSICS
@@ -165,28 +163,35 @@ class GameLayer(cocos.layer.Layer):
         list_values = values.split(',')
         for keypair in list_values:
             key,value = keypair.split('=')
-            if key=='sprite' and value=='food':
-                self.food_places.append( body )
+            if key=='sprite':
+                if value=='food':
+                    self.food_places.append( body )
+                elif value=='gasman':
+                    self.gasman_body = body
+                    body.userData = self.gasman_sprite
+                elif value=='gaswoman':
+                    self.gaswoman_body = body
+                    body.userData = self.gaswoman_sprite
 
     def setup_physics_world( self ):
 
         parser = svg_box2d_parser.SVGBox2dParser( self.world, 'level0.svg', ratio=PTM_RATIO, callback=self.physics_game_cb)
         parser.parse()
 
-        # create Pedo Man
-        bd = box2d.b2BodyDef()
-        bd.position = (15,1)
-        bd.angularDamping = 2.0
-        bd.linearDamping = 0.1
-        body = self.world.CreateBody(bd)
-        sd = box2d.b2CircleDef()
-        sd.density = 1.0
-        sd.radius = 0.5
-        sd.friction = 0.95
-        sd.restitution = 0.7
-        body.CreateShape(sd)
-        body.SetMassFromShapes()
-        self.pedoman_body = body
+        # create Gas Man
+#        bd = box2d.b2BodyDef()
+#        bd.position = (15,1)
+#        bd.angularDamping = 2.0
+#        bd.linearDamping = 0.1
+#        body = self.world.CreateBody(bd)
+#        sd = box2d.b2CircleDef()
+#        sd.density = 1.0
+#        sd.radius = 0.5
+#        sd.friction = 0.95
+#        sd.restitution = 0.7
+#        body.CreateShape(sd)
+#        body.SetMassFromShapes()
+#        self.gasman_body = body
 
 
         # food places
@@ -247,14 +252,20 @@ class GameLayer(cocos.layer.Layer):
         # are touching heavier bodies.
         body_pairs = [(p.shape1.GetBody(), p.shape2.GetBody()) for p in self.points]
         
-        for body1, body2 in body_pairs:
+        for pair in body_pairs:
+            body1 = pair[0]
+            body2 = pair[1]
             if ( (body1 in self.food_places or body2 in self.food_places) and \
-                (body1 == self.pedoman_body or body2 == self.pedoman_body ) ):
+                (body1 == self.gasman_body or body2 == self.gasman_body ) ):
                     self.food_eat( body1, body2 )
+            elif ( self.gasman_body in pair and self.gaswoman_body in pair):
+                self.level_complete()
 
+    def level_complete( self ):
+        print 'level complete'
 
     def food_eat( self, body1, body2 ):
-        shape = self.pedoman_body.shapeList[0]
+        shape = self.gasman_body.shapeList[0]
 
         # destroy food
         food_body = body1
@@ -275,11 +286,11 @@ class GameLayer(cocos.layer.Layer):
             sd.radius = shape.GetRadius() + 0.5
             sd.friction = 0.95
             sd.restitution = 0.7
-            self.pedoman_body.CreateShape(sd)
-#                    self.pedoman_body.SetMassFromShapes()
+            self.gasman_body.CreateShape(sd)
+#                    self.gasman_body.SetMassFromShapes()
 
             # destroy old shape
-            self.pedoman_body.DestroyShape( shape )
+            self.gasman_body.DestroyShape( shape )
 
         else:
             self.sounds_coin.play()
@@ -288,17 +299,21 @@ class GameLayer(cocos.layer.Layer):
 
     def update_sprite_positions( self ):
         # position
-        position = self.pedoman_body.position
-        position = (position.x * PTM_RATIO, position.y * PTM_RATIO)
-        self.pedoman_sprite.position = position
-        shape = self.pedoman_body.shapeList[0]
-        self.pedoman_sprite.scale = ( shape.radius * 2)     # scale 1 == 1 meter
 
-        # angle
-        angle = self.pedoman_body.angle
-        angle = math.degrees( angle )
-        self.pedoman_sprite.rotation = -angle
 
+        for body in self.world.bodyList:
+            sprite = body.userData
+            if isinstance( sprite, cocos.cocosnode.CocosNode):
+                position = body.position
+                position = (position.x * PTM_RATIO, position.y * PTM_RATIO)
+                sprite.position = position
+                shape = body.shapeList[0]
+                sprite.scale = ( shape.radius * 2)     # scale 1 == 1 meter
+
+                # angle
+                angle = body.angle
+                angle = math.degrees( angle )
+                sprite.rotation = -angle
 
     #
     # DRAW
@@ -331,14 +346,14 @@ class GameLayer(cocos.layer.Layer):
                 torque -= TORQUE_FORCE
 
             if torque != 0:
-                self.pedoman_body.ApplyTorque( torque )
+                self.gasman_body.ApplyTorque( torque )
 
     def on_key_press (self, key, modifiers):
         if key == Z:
             if self.state.farts > 0 :
                 self.state.farts -= 1
                 self.state.player_state = state.PLAYER_FARTING
-                body = self.pedoman_body
+                body = self.gasman_body
 #                f = (0.0, JUMP_IMPULSE)
                 f = body.GetWorldVector((0.0, JUMP_IMPULSE))
                 p = body.GetWorldPoint((0.0, 0.0))
@@ -386,5 +401,9 @@ def get_game_scene():
     s = cocos.scene.Scene()
     gameModel = GameLayer()
     gameModel.scale = 1
-    s.add( gameModel, z=0 )
+    s.add( gameModel, z=1 )
+
+    hud = HUD.HUD()
+    s.add( hud, z=10 )
+
     return s

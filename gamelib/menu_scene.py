@@ -26,6 +26,7 @@ import levels
 
 FONT_NAME = "Denne's Aliens"
 
+COLOR_WHITE = (255,255,255,255)
 class TitleLayer( Layer ):
     def __init__(self):
         super( TitleLayer, self ).__init__()
@@ -37,14 +38,14 @@ class TitleLayer( Layer ):
         self.font_title['font_name'] = FONT_NAME
         self.font_title['font_size'] = 26
 #        self.font_title['color'] = (204,164,164,255)
-        self.font_title['color'] = (255,204,204,255)
+        self.font_title['color'] = COLOR_WHITE
         self.font_title['anchor_y'] ='top'
         self.font_title['anchor_x'] ='right'
         title = Label('A LOVE STORY', **self.font_title )
         title.position=(w-10,30)
         self.add(title,z=1)
 
-        self.font_title['color'] = (64,32,32,255)
+        self.font_title['color'] = COLOR_WHITE
         title = Label('A LOVE STORY', **self.font_title )
         title.position=(w-12,32)
         self.add(title,z=0)
@@ -66,11 +67,11 @@ class ScoresLayer( ColorLayer):
         self.font_title['font_name'] = 'Denne\'s Alien'
         self.font_title['font_size'] = 36
 #        self.font_title['color'] = (204,164,164,255)
-        self.font_title['color'] = (255,255,255,255)
+        self.font_title['color'] = COLOR_WHITE
         self.font_title['anchor_y'] ='top'
         self.font_title['anchor_x'] ='center'
 
-        title = Label('PEDO MAN', **self.font_title )
+        title = Label('GAS MAN', **self.font_title )
 
         title.position=(w/2.0,h-5)
 
@@ -156,21 +157,21 @@ class ScoresLayer( ColorLayer):
 
 class OptionsMenu( Menu ):
     def __init__(self):
-        super( OptionsMenu, self).__init__('PEDO MAN') 
+        super( OptionsMenu, self).__init__('GAS MAN') 
         self.select_sound = soundex.load('move.mp3')
 
         # you can override the font that will be used for the title and the items
         self.font_title['font_name'] = FONT_NAME
         self.font_title['font_size'] = 72
 #        self.font_title['color'] = (204,164,164,255)
-        self.font_title['color'] = (255,255,255,255)
+        self.font_title['color'] = COLOR_WHITE
 
 
         self.font_item['font_name'] = FONT_NAME 
-        self.font_item['color'] = (32,16,32,255)
+        self.font_item['color'] = COLOR_WHITE
         self.font_item['font_size'] = 32
         self.font_item_selected['font_name'] = FONT_NAME
-        self.font_item_selected['color'] = (32,16,32,255)
+        self.font_item_selected['color'] = COLOR_WHITE
         self.font_item_selected['font_size'] = 46
 
         # you can also override the font size and the colors. see menu.py for
@@ -234,7 +235,7 @@ class OptionsMenu( Menu ):
 class MainMenu( Menu ):
 
     def __init__(self):
-        super( MainMenu, self).__init__('Pedo Man') 
+        super( MainMenu, self).__init__('GAS MAN') 
 
         self.select_sound = soundex.load('move.mp3')
 
@@ -244,13 +245,13 @@ class MainMenu( Menu ):
         self.font_title['font_name'] = FONT_NAME
         self.font_title['font_size'] = 72
 #        self.font_title['color'] = (204,164,164,255)
-        self.font_title['color'] = (255,255,255,255)
+        self.font_title['color'] = COLOR_WHITE
 
         self.font_item['font_name'] = FONT_NAME
-        self.font_item['color'] = (32,16,32,255)
+        self.font_item['color'] = COLOR_WHITE
         self.font_item['font_size'] = 32
         self.font_item_selected['font_name'] = FONT_NAME
-        self.font_item_selected['color'] = (32,16,32,255)
+        self.font_item_selected['color'] = COLOR_WHITE
         self.font_item_selected['font_size'] = 46
 
 

@@ -1,5 +1,5 @@
-The Adventures of Pedo Man
-==========================
+The Adventures of Gas Man
+=========================
 
 Entry in PyWeek #9  <http://www.pyweek.org/9/>
 Team: Solo Solo

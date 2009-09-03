@@ -153,7 +153,8 @@ class fwDebugDraw(box2d.b2DebugDraw):
     If you are writing your own game, you likely will not want to use debug drawing.
     Debug drawing, as its name implies, is for debugging.
     """
-    blended = grBlended()
+#    blended = grBlended()
+    blended = None
     circle_segments = 16
     surface = None
     circle_cache_tf = {} # triangle fan (inside)
@@ -291,7 +292,6 @@ class fwDebugDraw(box2d.b2DebugDraw):
         radius *= self.p2m_ratio
         tf_vertices, ll_vertices = self.getCircleVertices( center, radius, self.circle_segments)
         tf_count, ll_count = len(tf_vertices) / 2, len(ll_vertices) / 2
-
 
         self.batch.add(tf_count, gl.GL_TRIANGLES, self.blended,
             ('v2f', tf_vertices),

@@ -145,7 +145,9 @@ class SVGBox2dParser( object ):
             rel_pos.y = self.svg_size.y - rel_pos.y
             rel_pos /= self.ratio
 
-            radius = math.sqrt( rx * ry ) / self.ratio
+            scale_x = matrix.values[0]
+            scale_y = matrix.values[3]
+            radius = math.sqrt( rx * scale_x * ry * scale_y ) / self.ratio
 
             sd=b2CircleDef()
             sd.radius = radius
@@ -192,7 +194,7 @@ class SVGBox2dParser( object ):
         if restitution:
             restitution = float( restitution )
         else:
-            restitution = 0
+            restitution = 0.5
 
         density = node.getAttribute('physics_density')
         if density:
@@ -204,7 +206,7 @@ class SVGBox2dParser( object ):
         if friction:
             friction = float( friction )
         else:
-            friction = 1
+            friction = 0.8
 
         shape.restitution =  restitution
         shape.density = density
