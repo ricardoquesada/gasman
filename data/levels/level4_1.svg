@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.47pre1 r21720"
-   sodipodi:docname="level0.svg"
+   sodipodi:docname="level4_1.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs2824">
@@ -35,7 +35,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1"
      inkscape:cx="366.87731"
-     inkscape:cy="178.03998"
+     inkscape:cy="258.03998"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -62,19 +62,19 @@
      id="layer1"
      style="display:inline">
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:2.58756042;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3.00194502;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2844"
-       width="365.41241"
-       height="33.412434"
-       x="-0.20621958"
-       y="568.15594" />
+       width="497.99802"
+       height="32.998051"
+       x="0.00097274373"
+       y="568.36316" />
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3.67417812;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2874"
-       width="312"
-       height="35"
-       x="489"
-       y="567" />
+       width="162.32582"
+       height="36.325821"
+       x="639.3371"
+       y="566.3371" />
     <rect
        style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:6.65046072;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2876"
@@ -98,7 +98,7 @@
        sodipodi:rx="27.5"
        sodipodi:ry="30"
        d="m 278,372 a 27.5,30 0 1 1 -55,0 27.5,30 0 1 1 55,0 z"
-       transform="matrix(0.11853075,0,0,0.10865319,142.35135,506.53771)"
+       transform="matrix(0.11853075,0,0,0.10865319,135.35135,505.53771)"
        game_data="sprite=food" />
     <path
        sodipodi:type="arc"
@@ -132,16 +132,30 @@
        sodipodi:ry="28"
        d="m 647,340 a 26.5,28 0 1 1 -53,0 26.5,28 0 1 1 53,0 z"
        game_data="sprite=gaswoman"
-       transform="matrix(0.89865538,0,0,0.85051312,133.88434,236.32554)" />
+       transform="matrix(0.89865538,0,0,0.85051312,169.88434,236.32554)" />
     <rect
-       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3.21062422;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:2.30926609;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3133"
-       width="132.7894"
-       height="35.789371"
-       x="366.10532"
-       y="605.10529"
+       width="156.69075"
+       height="15.690735"
+       x="478.65463"
+       y="618.6546"
        game_data="sprite=game_over"
        physics_shape="isSensor=True" />
+    <rect
+       style="fill:#ff7f2a;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:0.48476443000000002;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4518"
+       width="832.51526"
+       height="7.5152354"
+       x="-26.257618"
+       y="-2.257618" />
+    <rect
+       style="fill:#ff7f2a;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:0.65619451;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4520"
+       width="21.343805"
+       height="167.34384"
+       x="613.82806"
+       y="433.82809" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -157,7 +171,7 @@
        sodipodi:rx="31"
        sodipodi:ry="29.5"
        d="m 665,152.5 a 31,29.5 0 1 1 -62,0 31,29.5 0 1 1 62,0 z"
-       transform="matrix(0.72876783,0.28593254,-0.27549502,0.75637823,-333.79265,241.91711)"
+       transform="matrix(0.72876783,0.28593254,-0.27549502,0.75637823,-353.79265,240.91711)"
        game_data="sprite=gasman" />
   </g>
 </svg>

@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.47pre1 r21720"
-   sodipodi:docname="level0.svg"
+   sodipodi:docname="level5_1.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs2824">
@@ -34,8 +34,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="366.87731"
-     inkscape:cy="178.03998"
+     inkscape:cx="406.87731"
+     inkscape:cy="258.03998"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -52,7 +52,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -62,33 +62,34 @@
      id="layer1"
      style="display:inline">
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:2.58756042;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:2.30176425;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2844"
-       width="365.41241"
-       height="33.412434"
-       x="-0.20621958"
-       y="568.15594" />
+       width="286.69821"
+       height="33.698231"
+       x="-0.3491177"
+       y="568.01306" />
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:2.85770583;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2874"
-       width="312"
-       height="35"
-       x="489"
-       y="567" />
+       width="320.1423"
+       height="11.142294"
+       x="350.4859"
+       y="613.34546"
+       transform="matrix(0.97376535,-0.2275545,0.2275545,0.97376535,0,0)" />
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:6.65046072;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:6.45025539;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2876"
-       width="13.349539"
-       height="598.34955"
-       x="787.82526"
-       y="1.8252305" />
+       width="13.549744"
+       height="554.5498"
+       x="787.72516"
+       y="45.725124" />
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:6.93233061;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:6.72633314;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2878"
-       width="24.067669"
-       height="598.06769"
-       x="-0.033834685"
-       y="1.9661653" />
+       width="24.273666"
+       height="558.27368"
+       x="-0.13683358"
+       y="41.863174" />
     <path
        sodipodi:type="arc"
        style="fill:#00ff00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -132,16 +133,56 @@
        sodipodi:ry="28"
        d="m 647,340 a 26.5,28 0 1 1 -53,0 26.5,28 0 1 1 53,0 z"
        game_data="sprite=gaswoman"
-       transform="matrix(0.89865538,0,0,0.85051312,133.88434,236.32554)" />
+       transform="matrix(0.89865538,0,0,0.85051312,-415.11566,-2.67446)" />
     <rect
-       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3.21062422;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5.1865468;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3133"
-       width="132.7894"
-       height="35.789371"
-       x="366.10532"
-       y="605.10529"
+       width="499.81351"
+       height="24.813452"
+       x="290.09329"
+       y="606.09326"
        game_data="sprite=game_over"
        physics_shape="isSensor=True" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#00ff00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path2833"
+       sodipodi:cx="492.5"
+       sodipodi:cy="483"
+       sodipodi:rx="4.5"
+       sodipodi:ry="4"
+       d="m 497,483 a 4.5,4 0 1 1 -9,0 4.5,4 0 1 1 9,0 z"
+       transform="translate(28,2)"
+       game_data="sprite=food" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#00ff00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path2835"
+       sodipodi:cx="596"
+       sodipodi:cy="453"
+       sodipodi:rx="5"
+       sodipodi:ry="5"
+       d="m 601,453 a 5,5 0 1 1 -10,0 5,5 0 1 1 10,0 z"
+       transform="translate(0,12)"
+       game_data="sprite=food" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#00ff00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path2837"
+       sodipodi:cx="688.5"
+       sodipodi:cy="433.5"
+       sodipodi:rx="5.5"
+       sodipodi:ry="4.5"
+       d="m 694,433.5 a 5.5,4.5 0 1 1 -11,0 5.5,4.5 0 1 1 11,0 z"
+       transform="translate(8,3)"
+       game_data="sprite=food" />
+    <rect
+       style="fill:#ff7f2a;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:1.20084298;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2843"
+       width="339.79916"
+       height="12.799157"
+       x="23.100428"
+       y="323.10043" />
   </g>
   <g
      inkscape:groupmode="layer"

@@ -5,7 +5,9 @@ from cocos.actions import *
 import pyglet
 from pyglet.gl import *
 
+# locals
 from state import state
+import levels
 
 class ScoreLayer( Layer ): 
     def __init__(self):
@@ -102,6 +104,10 @@ class HUD( Layer ):
 
     def show_message( self, msg, callback = None ):
         self.get('msg').show_message( msg, callback )
+
+    def show_level_name( self ):
+        name = '%d: %s' % ( state.level_idx, levels.get_level_name( state.level_idx) )
+        self.show_message( name )
 
     def level_complete( self ):
         self.show_message('WELL DONE!')

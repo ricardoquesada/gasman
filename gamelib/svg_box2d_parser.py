@@ -7,7 +7,9 @@ import math
 
 from xml.dom.minidom import parse, parseString
 
-
+DEFAULT_FRICTION = 1
+DEFAULT_RESTITUTION = 0.2
+DEFAULT_DENSITY = 1
 
 class SVGBox2dParser( object ):
 
@@ -188,28 +190,40 @@ class SVGBox2dParser( object ):
         matrix = squirtle.Matrix( s )
         return matrix
 
+
+    def cast_value( self, value ):
+        value = value.lower()
+
+        # is bool
+        if value in ['true','false']:
+            if value == 'true':
+                return True
+            return False
+
+        # then it is a float or a int (string is not supported)
+        f = float( value )
+        i = int (value )
+
+        # integer ?
+        if f == i:
+            return i
+        # nope, float
+        return f
+
     def apply_physics_properties_to_shape( self, node, shape ):
 
-        restitution = node.getAttribute('physics_restitution')
-        if restitution:
-            restitution = float( restitution )
-        else:
-            restitution = 0.2
-        shape.restitution =  restitution
+        shape.restitution = DEFAULT_RESTITUTION
+        shape.density = DEFAULT_DENSITY
+        shape.friction = DEFAULT_FRICTION
 
-        density = node.getAttribute('physics_density')
-        if density:
-            density = float( density )
-        else:
-            density = 1
-        shape.density = density
+        data = node.getAttribute('physics_shape' )
 
-        friction = node.getAttribute('physics_friction')
-        if friction:
-            friction = float( friction )
-        else:
-            friction = 1
-        shape.friction = friction
+        if data:
+            keyvalues = data.split(',')
+            for keyvalue in keyvalues:
+                key,value = keyvalue.split('=')
+                value = self.cast_value( value )
+                setattr( shape, key, value )
 
 
     def apply_physics_properties_to_body( self, body ):

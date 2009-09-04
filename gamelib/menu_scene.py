@@ -42,7 +42,7 @@ class TitleLayer( Layer ):
         self.font_title['color'] = COLOR_WHITE
         self.font_title['anchor_y'] ='top'
         self.font_title['anchor_x'] ='right'
-        title = Label('A COMPLEX LOVE STORY', **self.font_title )
+        title = Label('A SOUND LOVE STORY', **self.font_title )
         title.position=(w-10,30)
         self.add(title,z=1)
 
@@ -65,7 +65,7 @@ class ScoresLayer( ColorLayer):
         self.font_title = {}
 
         # you can override the font that will be used for the title and the items
-        self.font_title['font_name'] = 'Denne\'s Alien'
+        self.font_title['font_name'] = FONT_NAME
         self.font_title['font_size'] = 36
 #        self.font_title['color'] = (204,164,164,255)
         self.font_title['color'] = COLOR_WHITE
@@ -193,7 +193,7 @@ class OptionsMenu( Menu ):
                         'Start Level: ', 
                         self.on_level,
                         self.levels,
-                        0 )
+                        int(state.state.level_idx) )
                     )
 
         items.append( MultipleMenuItem(
@@ -227,7 +227,7 @@ class OptionsMenu( Menu ):
         soundex.sound_volume( vol )
 
     def on_level( self, idx ):
-        state.start_level = idx
+        state.state.level_idx= idx
 
     def on_music_volume( self, idx ):
         vol = idx / 10.0

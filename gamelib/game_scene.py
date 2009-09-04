@@ -33,8 +33,8 @@ from box2d_callbacks import *
 from settings import fwSettings
 
 PTM_RATIO = 52
-TORQUE_FORCE = 20
-JUMP_IMPULSE = 10
+TORQUE_FORCE = 17
+JUMP_IMPULSE = 8
 
 class GameLayer(cocos.layer.Layer):
 
@@ -57,7 +57,7 @@ class GameLayer(cocos.layer.Layer):
 
     def show_level( self, dt ):
         self.unschedule( self.show_level )
-        self.HUD_delegate.show_message('LEVEL %d' % self.state.level_idx)
+        self.HUD_delegate.show_level_name()
         self.state.state = state.STATE_PLAY
 
     #
@@ -78,9 +78,18 @@ class GameLayer(cocos.layer.Layer):
     def init_sounds( self ):
         self.sounds_coin = soundex.load('sounds/crunch_01.mp3')
         self.sounds_powerup = soundex.load('sounds/powerup_01.wav')
-        self.sounds_fart = soundex.load('sounds/fart_01.mp3')
+        self.sounds_farts = []
+        self.sounds_farts.append( soundex.load('sounds/fart_01.mp3') )
+        self.sounds_farts.append( soundex.load('sounds/fart_02.mp3') )
+        self.sounds_farts.append( soundex.load('sounds/fart_03.mp3') )
+        self.sounds_farts.append( soundex.load('sounds/fart_04.mp3') )
+        self.sounds_farts.append( soundex.load('sounds/fart_05.mp3') )
+        self.sounds_farts.append( soundex.load('sounds/fart_06.mp3') )
+        self.sounds_farts.append( soundex.load('sounds/fart_08.mp3') )
+        self.sounds_farts.append( soundex.load('sounds/fart_09.mp3') )
+        self.sounds_farts.append( soundex.load('sounds/fart_10.mp3') )
+        self.sounds_farts.append( soundex.load('sounds/fart_11.mp3') )
         self.sounds_level_complete = soundex.load('sounds/level_complete_01.mp3')
-        self.sounds_level_over = soundex.load('sounds/game_over_01.mp3')
 
         soundex.set_music('music_01.mp3')
         soundex.play_music()
@@ -204,6 +213,17 @@ class GameLayer(cocos.layer.Layer):
                 elif value=='gaswoman':
                     self.gaswoman_body = body
                     body.userData = self.gaswoman_sprite
+                    shape = body.shapeList[0]
+                    sd = box2d.b2CircleDef()
+                    sd.radius = 0.5
+                    sd.density = 1
+                    sd.friction = 1
+                    sd.restitution = shape.restitution
+                    body.CreateShape(sd)
+
+                    body.DestroyShape(shape)
+
+                    body.SetMassFromShapes()
 
                 elif value=='game_over':
                     self.deadly_places.append( body )
@@ -211,7 +231,7 @@ class GameLayer(cocos.layer.Layer):
 
     def setup_physics_world( self ):
 
-        level_name = "levels/level%d.svg" % self.state.level_idx
+        level_name = levels.get_level_filename( self.state.level_idx )
         parser = svg_box2d_parser.SVGBox2dParser( self.world, level_name, ratio=PTM_RATIO, callback=self.physics_game_cb)
         parser.parse()
 
@@ -303,6 +323,7 @@ class GameLayer(cocos.layer.Layer):
     def collision_gasman_gaswoman( self ):
         if self.state.state == state.STATE_PLAY:
             self.state.state = state.STATE_WIN
+            self.state.score += 10
             self.sounds_level_complete.play()
             self.HUD_delegate.level_complete()
             self.schedule_interval( self.level_next_async, 1.5 )
@@ -325,7 +346,6 @@ class GameLayer(cocos.layer.Layer):
         self.food_places.remove( food_body )
 
         self.state.coins += 1
-
         self.state.score += 1
 
         if self.state.coins % 3 == 0:
@@ -410,12 +430,15 @@ class GameLayer(cocos.layer.Layer):
                     f = body.GetWorldVector((0.0, JUMP_IMPULSE))
                     p = body.GetWorldPoint((0.0, 0.0))
                     body.ApplyImpulse(f, p)
-                    self.sounds_fart.play()
+                    random.choice( self.sounds_farts ).play()
                 return True
             elif key in (LEFT, RIGHT):
                 self.keys_pressed.add(key)
                 self.update_keys()
                 return True 
+            elif key == R:
+                self.level_restart()
+                return True
         return False 
 
     def on_key_release (self, key, modifiers):
