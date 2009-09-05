@@ -13,6 +13,7 @@ from cocos.director import director
 
 from game_scene import *
 from menu_scene import *
+from intro_scene import *
 
 import data
 
@@ -26,6 +27,7 @@ def main():
     director.init( width=800, height=600)
     director.set_depth_test(True)
 
-    s = get_menu_scene()
+#    s = get_menu_scene()
+    s = get_intro_scene()
 #    s = get_game_scene()
     director.run (s)

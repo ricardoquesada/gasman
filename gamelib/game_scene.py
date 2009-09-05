@@ -34,7 +34,7 @@ from settings import fwSettings
 import gradient_layer
 
 PTM_RATIO = 52
-TORQUE_FORCE = 12
+TORQUE_FORCE = 15
 JUMP_IMPULSE = 8
 
 class GameLayer(cocos.layer.Layer):
@@ -552,9 +552,13 @@ class GameLayer(cocos.layer.Layer):
         self.level_new()
 
     def level_next( self ):
-        state.level_idx += 1
-        self.level_new()
-        state.set_level( state.level_idx )
+        if state.level_idx == len( levels.levels) -1:
+            self.parent.add( gameover.GameOver( win=True) , z=10 )
+        else:
+            state.level_idx += 1
+            self.level_new()
+            state.set_level( state.level_idx )
+
 
     def level_next_async( self, dt ):
         self.unschedule( self.level_next_async )

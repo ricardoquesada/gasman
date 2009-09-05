@@ -1,0 +1,10 @@
+307,Gas Man,13
+242,Gas Man,17
+229,Gas Man,10
+204,Gas Man,9
+150,Gas Man,17
+114,Gas Man,6
+111,Gas Man,9
+109,Gas Man,11
+100,Gas Man,7
+94,Gas Man,6

@@ -18,6 +18,7 @@ import hiscore
 from state import state
 import game_scene
 
+FONT_NAME = 'Gas'
 
 class GameOver( ColorLayer ):
     is_event_handler = True #: enable pyglet's events
@@ -31,13 +32,13 @@ class GameOver( ColorLayer ):
 
         if win:
             soundex.play('sounds/you_win.mp3')
-            msg = 'LOVE ME DO'
+            msg = 'FART IN LOVE'
         else:
             soundex.play('sounds/game_over_01.mp3')
             msg = 'GAME OVER'
 
         label = Label(msg,
-                    font_name='Edit Undo Line BRK',
+                    font_name=FONT_NAME,
                     font_size=54,
                     anchor_y='center',
                     anchor_x='center' )
@@ -58,7 +59,7 @@ class GameOver( ColorLayer ):
             self.hi_score = True
 
             label = Label('Enter your name:',
-                        font_name='Edit Undo Line BRK',
+                        font_name=FONT_NAME,
                         font_size=36,
                         anchor_y='center',
                         anchor_x='center',
@@ -69,7 +70,7 @@ class GameOver( ColorLayer ):
             self.add( label )
 
             self.name= Label('',
-                        font_name='Edit Undo Line BRK',
+                        font_name=FONT_NAME,
                         font_size=36,
                         anchor_y='center',
                         anchor_x='center',
@@ -82,7 +83,7 @@ class GameOver( ColorLayer ):
 
             if not self.win:
                 label = Label("Press 'R' to restart level",
-                            font_name='Edit Undo Line BRK',
+                            font_name=FONT_NAME,
                             font_size=18,
                             anchor_y='center',
                             anchor_x='center' )
