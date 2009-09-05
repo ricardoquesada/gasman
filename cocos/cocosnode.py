@@ -690,4 +690,15 @@ class CocosNode(object):
                 action.stop()
                 self.remove_action( action )
 
+    def get_world_position( self ):
+        """Returns the world position"""
 
+        x,y= self.position
+
+        parent = self.parent
+        while parent != None:
+            x += parent.x
+            y += parent.y
+            parent = parent.parent
+
+        return (x,y)

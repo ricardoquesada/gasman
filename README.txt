@@ -9,8 +9,6 @@ Members: Ricardo Quesada
 DEPENDENCIES:
 
 You might need to install some of these before running the game:
-
-  Python:     http://www.python.org/
   PyBox2d:    http://code.google.com/p/pybox2d/
 
 
@@ -27,11 +25,12 @@ Othewise open a terminal / console and "cd" to the game directory and run:
 
 HOW TO PLAY THE GAME:
 
-Cursos: left, right, up, down
-z: fart
+Movement:
+    Left, Right: cursors left, right
+    Jump (fart): Space or Up
+
 
 LICENSE:
-
 GNU GPL v2
 
 

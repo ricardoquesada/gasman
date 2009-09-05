@@ -18,6 +18,29 @@
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs2824">
+    <pattern
+       inkscape:stockid="Checkerboard white"
+       id="Checkerboardwhite"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="2"
+       width="2"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect4490"
+         height="1"
+         width="1"
+         y="0"
+         x="0"
+         style="fill:white;stroke:none" />
+      <rect
+         id="rect4492"
+         height="1"
+         width="1"
+         y="1"
+         x="1"
+         style="fill:white;stroke:none" />
+    </pattern>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
        inkscape:vp_x="0 : 300 : 1"
@@ -82,11 +105,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="383.87731"
-     inkscape:cy="258.03998"
+     inkscape:zoom="0.83471117"
+     inkscape:cx="395.36614"
+     inkscape:cy="298.99999"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g3647"
      showgrid="false"
      inkscape:window-width="1273"
      inkscape:window-height="753"
@@ -109,37 +132,37 @@
      inkscape:label="physics:static"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline">
+     style="display:none">
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:1.8992815;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2844"
        width="311.73959"
        height="21.100712"
-       x="-193.54221"
-       y="561.98657"
+       x="-200.95488"
+       y="541.86115"
        transform="matrix(0.92802492,-0.37251811,0.37251811,0.92802492,0,0)" />
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5.18156815;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2874"
        width="336.81842"
        height="34.818432"
-       x="520.14563"
-       y="359.93509"
+       x="507.07614"
+       y="361.62448"
        transform="matrix(0.991749,0.12819483,-0.12819483,0.991749,0,0)" />
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:6.65046072;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2876"
-       width="13.349539"
-       height="598.34955"
-       x="787.82526"
-       y="1.8252305" />
+       width="34.30978"
+       height="596.54779"
+       x="765.96399"
+       y="1.0511109" />
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:6.93233061;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2878"
        width="24.067669"
        height="598.06769"
-       x="-0.033834685"
-       y="1.9661653" />
+       x="1.5"
+       y="0.43231201" />
     <path
        sodipodi:type="arc"
        style="fill:#00ff00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -149,7 +172,7 @@
        sodipodi:rx="27.5"
        sodipodi:ry="30"
        d="m 278,372 a 27.5,30 0 1 1 -55,0 27.5,30 0 1 1 55,0 z"
-       transform="matrix(0.11853075,0,0,0.10865319,132.35135,472.53771)"
+       transform="matrix(0.11853075,0,0,0.10865319,129.95531,453.3694)"
        game_data="sprite=food" />
     <path
        sodipodi:type="arc"
@@ -161,7 +184,7 @@
        sodipodi:ry="15"
        d="m 315,402 a 13,15 0 1 1 -26,0 13,15 0 1 1 26,0 z"
        game_data="sprite=food"
-       transform="matrix(0.2311751,0,0,0.20035175,137.22843,416.41529)" />
+       transform="matrix(0.2311751,0,0,0.20035175,137.22843,390.05887)" />
     <path
        sodipodi:type="arc"
        style="fill:#00ff00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -172,7 +195,7 @@
        sodipodi:ry="13"
        d="m 399,440 a 11,13 0 1 1 -22,0 11,13 0 1 1 22,0 z"
        game_data="sprite=food"
-       transform="matrix(0.26642076,0,0,0.22543296,143.67205,379.7662)" />
+       transform="matrix(0.26642076,0,0,0.22543296,149.66215,352.21176)" />
     <path
        sodipodi:type="arc"
        style="fill:#ff00ff;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -194,14 +217,14 @@
        game_data="sprite=game_over"
        physics_shape="isSensor=True" />
     <rect
-       style="fill:#ffcc00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3.4265337;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffcc00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3156"
        width="147.57349"
        height="26.573465"
-       x="0.21326736"
+       x="1.5"
        y="235.21327" />
     <rect
-       style="fill:#ffcc00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3.54617691;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffcc00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3.00085592;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3158"
        width="148.22812"
        height="20.143925"
@@ -246,7 +269,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="physics:dynamic"
-     style="display:inline">
+     style="display:none">
     <path
        sodipodi:type="arc"
        style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -256,7 +279,22 @@
        sodipodi:rx="31"
        sodipodi:ry="29.5"
        d="m 665,152.5 a 31,29.5 0 1 1 -62,0 31,29.5 0 1 1 62,0 z"
-       transform="matrix(0.72876783,0.28593254,-0.27549502,0.75637823,-333.79265,241.91711)"
+       transform="matrix(0.72876783,0.28593254,-0.27549502,0.75637823,-344.57482,210.76861)"
        game_data="sprite=gasman" />
+  </g>
+  <g
+     style="display:inline"
+     id="g3647"
+     inkscape:groupmode="layer"
+     inkscape:label="graphics">
+    <path
+       style="fill:url(#Checkerboardwhite);fill-opacity:1.0;fill-rule:evenodd;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 1.5,0.4375 0,234.78125 0,26.5625 0,336.71875 24.0625,0 286.96875,-117.3125 -7.875,-19.59375 L 25.5625,573.625 l 0,-311.84375 123.5,0 120.53125,54.28125 8.1875,-18.40625 -134.375,-62.4375 -117.84375,0 0,-234.78125 -24.0625,0 z"
+       id="rect3649"
+       sodipodi:nodetypes="cccccccccccccccc" />
+    <path
+       style="fill:url(#Checkerboardwhite);fill-opacity:1.0;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 765.96875 1.0625 L 765.96875 463.625 L 456.53125 423.65625 L 452.0625 458.1875 L 765.96875 498.75 L 765.96875 597.59375 L 800.28125 597.59375 L 800.28125 1.0625 L 765.96875 1.0625 z "
+       id="rect3651" />
   </g>
 </svg>

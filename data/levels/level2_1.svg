@@ -18,6 +18,29 @@
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs2824">
+    <pattern
+       inkscape:stockid="Checkerboard white"
+       id="Checkerboardwhite"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="2"
+       width="2"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <rect
+         id="rect4490"
+         height="1"
+         width="1"
+         y="0"
+         x="0"
+         style="fill:white;stroke:none" />
+      <rect
+         id="rect4492"
+         height="1"
+         width="1"
+         y="1"
+         x="1"
+         style="fill:white;stroke:none" />
+    </pattern>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
        inkscape:vp_x="0 : 300 : 1"
@@ -83,10 +106,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="383.87731"
-     inkscape:cy="258.03998"
+     inkscape:cx="317.87731"
+     inkscape:cy="98.03998"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g8630"
      showgrid="false"
      inkscape:window-width="1273"
      inkscape:window-height="753"
@@ -109,29 +132,29 @@
      inkscape:label="physics:static"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline">
+     style="display:none">
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:1.8992815;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2844"
        width="311.73959"
        height="21.100712"
-       x="-193.54221"
-       y="561.98657"
+       x="-199.19595"
+       y="543.85815"
        transform="matrix(0.92802492,-0.37251811,0.37251811,0.92802492,0,0)" />
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:6.65046072;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2876"
-       width="13.349539"
-       height="598.34955"
-       x="787.82526"
-       y="1.8252305" />
+       width="25.778307"
+       height="595.77832"
+       x="774.1109"
+       y="2.7216797" />
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:6.93233061;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2878"
        width="24.067669"
        height="598.06769"
-       x="-0.033834685"
-       y="1.9661653" />
+       x="1.5"
+       y="0.43231201" />
     <path
        sodipodi:type="arc"
        style="fill:#00ff00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -141,7 +164,7 @@
        sodipodi:rx="27.5"
        sodipodi:ry="30"
        d="m 278,372 a 27.5,30 0 1 1 -55,0 27.5,30 0 1 1 55,0 z"
-       transform="matrix(0.11853075,0,0,0.10865319,132.35135,472.53771)"
+       transform="matrix(0.11853075,0,0,0.10865319,128.35135,437.53771)"
        game_data="sprite=food" />
     <path
        sodipodi:type="arc"
@@ -153,7 +176,7 @@
        sodipodi:ry="15"
        d="m 315,402 a 13,15 0 1 1 -26,0 13,15 0 1 1 26,0 z"
        game_data="sprite=food"
-       transform="matrix(0.2311751,0,0,0.20035175,137.22843,416.41529)" />
+       transform="matrix(0.2311751,0,0,0.20035175,133.22843,387.41529)" />
     <path
        sodipodi:type="arc"
        style="fill:#00ff00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -164,7 +187,7 @@
        sodipodi:ry="13"
        d="m 399,440 a 11,13 0 1 1 -22,0 11,13 0 1 1 22,0 z"
        game_data="sprite=food"
-       transform="matrix(0.26642076,0,0,0.22543296,143.67205,379.7662)" />
+       transform="matrix(0.26642076,0,0,0.22543296,142.67205,354.7662)" />
     <path
        sodipodi:type="arc"
        style="fill:#ff00ff;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -175,7 +198,7 @@
        sodipodi:ry="28"
        d="m 647,340 a 26.5,28 0 1 1 -53,0 26.5,28 0 1 1 53,0 z"
        game_data="sprite=gaswoman"
-       transform="matrix(0.89865538,0,0,0.85051312,192.88434,109.32554)" />
+       transform="matrix(0.89865538,0,0,0.85051312,166.88434,115.32554)" />
     <rect
        style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:7.07085037;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3133"
@@ -186,7 +209,7 @@
        game_data="sprite=game_over"
        physics_shape="isSensor=True" />
     <rect
-       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:1.16276991;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2899"
        width="307.83722"
        height="21.837231"
@@ -197,7 +220,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="physics:dynamic"
-     style="display:inline">
+     style="display:none">
     <path
        sodipodi:type="arc"
        style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -207,7 +230,21 @@
        sodipodi:rx="31"
        sodipodi:ry="29.5"
        d="m 665,152.5 a 31,29.5 0 1 1 -62,0 31,29.5 0 1 1 62,0 z"
-       transform="matrix(0.72876783,0.28593254,-0.27549502,0.75637823,-333.79265,241.91711)"
+       transform="matrix(0.72876783,0.28593254,-0.27549502,0.75637823,-338.79265,206.91711)"
        game_data="sprite=gasman" />
+  </g>
+  <g
+     style="display:inline"
+     id="g8630"
+     inkscape:groupmode="layer"
+     inkscape:label="graphics">
+    <path
+       style="fill:url(#Checkerboardwhite);fill-opacity:1.0;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 1.5 0.4375 L 1.5 598.5 L 25.5625 598.5 L 25.5625 598.4375 L 25.59375 598.5 L 314.90625 482.375 L 307.03125 462.78125 L 25.5625 575.78125 L 25.5625 0.4375 L 1.5 0.4375 z "
+       id="rect8632" />
+    <path
+       style="fill:url(#Checkerboardwhite);fill-opacity:1.0;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 774.125 2.71875 L 774.125 436.09375 L 492.09375 436.09375 L 492.09375 457.90625 L 774.125 457.90625 L 774.125 598.5 L 799.875 598.5 L 799.875 457.90625 L 799.90625 457.90625 L 799.90625 436.09375 L 799.875 436.09375 L 799.875 2.71875 L 774.125 2.71875 z "
+       id="rect8634" />
   </g>
 </svg>

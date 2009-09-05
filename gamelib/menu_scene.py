@@ -24,6 +24,7 @@ import soundex
 import state
 import levels
 import hiscore
+import gradient_layer
 
 FONT_NAME = "Denne's Aliens"
 
@@ -302,7 +303,14 @@ def get_menu_scene():
                     ScoresLayer(),
                     ),
                 z=2 ) 
-#    scene.add( BackgroundLayer(), z=0 )
+
+    gradient = gradient_layer.GradientLayer( 
+        (175,203,240,255),
+        (181,68,32,255),
+        (32,143,168,255),
+        (63,32,12,255)
+        )
+    scene.add( gradient, z=-10 )
     scene.add( TitleLayer(), z=2)
 #    game_model = GameLayer(demo=True)
 #    scene.add( game_model, z=1)

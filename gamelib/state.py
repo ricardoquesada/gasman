@@ -20,8 +20,11 @@ class State( object ):
         # eated coins
         self.coins = 0
 
+        # lives
+        self.lives = 5
+    
         # farts
-        self.farts = 0
+        self.farts = 5
 
         # game state
         self.game_state = self.STATE_PAUSE
@@ -35,13 +38,12 @@ class State( object ):
     def reset( self ):
         self.score = 0
         self.coins = 0
-        self.farts = 0
+        self.farts = 5
         self.state = self.STATE_PAUSE
 
     def set_level( self, l ):
         self.level_idx = l
         self.coins = 0
-        self.farts = 0
-        self.time = self.level.time
+        self.farts = 5
 
 state = State()

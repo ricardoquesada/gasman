@@ -31,6 +31,7 @@ import HUD
 import gameover
 from box2d_callbacks import *
 from settings import fwSettings
+import gradient_layer
 
 PTM_RATIO = 52
 TORQUE_FORCE = 17
@@ -46,12 +47,12 @@ class GameLayer(cocos.layer.Layer):
         self.schedule( self.main_loop)
         self.schedule_interval( self.show_level, 0.5 )
 
+        self.init_background()
         self.init_game_state()
         self.init_events()
         self.init_sounds()
         self.init_sprites()
         self.init_physics()
-        self.init_background()
 
         self.HUD_delegate = None
 
@@ -64,7 +65,29 @@ class GameLayer(cocos.layer.Layer):
     # IMAGES
     #
     def init_background( self ):
-        self.background = squirtle.SVG( data.filepath("sprites/gasman-character2.svg") )
+        self.with_background = True
+        name = levels.get_level_filename( state.level_idx )
+        name = name.split('.')[0]
+        name = '%s.png' % name
+        try:
+            background = Sprite( name )
+            background.image_anchor = (0,0)
+            self.add( background )
+        except Exception:
+            self.with_background = False
+
+        r1 = random.random() * 0.2 + 0.9 
+        r2 = random.random() * 0.2 + 0.9 
+        r3 = random.random() * 0.2 + 0.9 
+        r4 = random.random() * 0.2 + 0.9 
+        gradient = gradient_layer.GradientLayer( 
+            (175*r1,203*r1,240*r1,255),
+            (181*r2,68*r2,32*r2,255),
+            (32*r3,143*r3,168*r3,255),
+            (63*r4,32*r4,12*r4,255)
+            )
+        self.add( gradient, z=-10)
+        
 
     #
     # GAME STATE
@@ -149,7 +172,9 @@ class GameLayer(cocos.layer.Layer):
         # Set the other settings that aren't contained in the flags
         self.world.SetWarmStarting(settings.enableWarmStarting)
         self.world.SetContinuousPhysics(settings.enableTOI)
-        self.world.SetDebugDraw( self.debugDraw )
+
+        if not self.with_background:
+            self.world.SetDebugDraw( self.debugDraw )
 
         # Set the flags based on what the settings show (uses a bitwise or mask)
         flags = 0
@@ -330,8 +355,12 @@ class GameLayer(cocos.layer.Layer):
 
     def collision_gasman_deadly( self ):
         if self.state.state == state.STATE_PLAY:
-            self.state.state = state.STATE_OVER
-            self.parent.add( gameover.GameOver( win=False) , z=10 )
+            self.state.lives -= 1
+            if self.state.lives == 0:
+                self.state.state = state.STATE_OVER
+                self.parent.add( gameover.GameOver( win=False) , z=10 )
+            else:
+                self.level_restart()
 
     def food_eat( self, body1, body2 ):
         shape = self.gasman_body.shapeList[0]
@@ -346,9 +375,9 @@ class GameLayer(cocos.layer.Layer):
         self.food_places.remove( food_body )
 
         self.state.coins += 1
-        self.state.score += 1
+        self.state.score += 3
 
-        if self.state.coins % 3 == 0:
+        if self.state.coins % 10 == 0:
             self.sounds_powerup.play()
             self.state.farts += 1
 
@@ -397,7 +426,6 @@ class GameLayer(cocos.layer.Layer):
         self.transform()
         self.debugDraw.batch.draw()
 
-        self.background.draw( *self.position )
         glPopMatrix()
 
         # clean used batch
@@ -488,6 +516,7 @@ class GameLayer(cocos.layer.Layer):
     def level_next( self ):
         state.level_idx += 1
         self.level_new()
+        state.set_level( state.level_idx )
 
     def level_next_async( self, dt ):
         self.unschedule( self.level_next_async )

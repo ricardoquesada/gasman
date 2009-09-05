@@ -63,6 +63,10 @@ class Color( object ):
 
 
 class ParticleSystem( CocosNode ):
+
+    # type of particle
+    POSITION_FREE, POSITION_GROUPED = range(2)
+
     #: is the particle system active ?
     active = True
 
@@ -130,6 +134,9 @@ class ParticleSystem( CocosNode ):
     #:color modulate
     color_modulate = True
 
+    # position type
+    position_type = POSITION_GROUPED
+
     def __init__(self):
         super(ParticleSystem,self).__init__()
 
@@ -153,12 +160,17 @@ class ParticleSystem( CocosNode ):
         self.particle_life.fill(-1.0)
         # size x 1
         self.particle_size = numpy.zeros( (self.total_particles, 1), numpy.float32 )
+        # start position
+        self.start_pos = numpy.zeros( (self.total_particles, 2), numpy.float32 )
 
         #: How many particles can be emitted per second
         self.emit_counter = 0
         
         #: Count of particles
         self.particle_count = 0
+
+        #: auto remove when particle finishes
+        self.auto_remove_on_finish = False
 
         self.schedule( self.step )
 
@@ -221,14 +233,16 @@ class ParticleSystem( CocosNode ):
 
 
     def step( self, delta ):
+
+        # update particle count
+        self.particle_count = numpy.sum( self.particle_life >= 0 )
+
         if self.active:
             rate = 1.0 / self.emission_rate
             self.emit_counter += delta
 
 #            if random.random() < 0.01:
 #                delta += 0.5
-
-            self.particle_count = sum( self.particle_life >= 0 )
 
             while self.particle_count < self.total_particles and self.emit_counter > rate:
                 self.add_particle()
@@ -240,6 +254,10 @@ class ParticleSystem( CocosNode ):
                 self.stop_system()
 
         self.update_particles( delta )
+
+        if self.particle_count == 0 and self.auto_remove_on_finish == True:
+            self.unschedule( self.step )
+            self.parent.remove( self )
 
     def add_particle( self ):
         self.init_particle()
@@ -280,6 +298,14 @@ class ParticleSystem( CocosNode ):
         self.particle_life -= delta
 
 
+        # position: free or grouped
+        if self.position_type == self.POSITION_FREE:
+            world_pos = self.get_world_position()
+            tuple = numpy.array( [world_pos[0], world_pos[1]] )
+            tmp = tuple - self.start_pos
+            self.particle_pos -= tmp
+
+
         # color
         self.particle_color += self.particle_delta_color * delta
 
@@ -307,6 +333,10 @@ class ParticleSystem( CocosNode ):
         self.particle_pos[idx][0] = self.pos_var.x * rand()
         self.particle_pos[idx][1] = self.pos_var.y * rand()
 
+        # start position
+        world_pos = self.get_world_position()
+        self.start_pos[idx][0] = world_pos[0]
+        self.start_pos[idx][1] = world_pos[1]
 
         a = math.radians( self.angle + self.angle_var * rand() )
         v = Point2( math.cos( a ), math.sin( a ) )

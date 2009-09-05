@@ -15,7 +15,7 @@ class ScoreLayer( Layer ):
         super( ScoreLayer, self).__init__()
 
         # transparent layer
-        self.add( ColorLayer(128,230,128,128, width=w, height=48),z=-1 )
+        self.add( ColorLayer(32,32,32,200, width=w, height=48),z=-1 )
 
         self.position = (0,h-48)
 
@@ -35,13 +35,13 @@ class ScoreLayer( Layer ):
         self.farts.position=(250,0)
         self.add( self.farts)
 
-        self.time= Label('time:', font_size=36,
+        self.lives= Label('Lives:', font_size=36,
                 font_name='Edit Undo Line BRK',
                 color=(255,255,255,255),
                 anchor_x='left',
                 anchor_y='bottom')
-        self.time.position=(480,0)
-        self.add( self.time)
+        self.lives.position=(480,0)
+        self.add( self.lives)
 
         self.lvl=  Label('Lvl:', font_size=36,
                 font_name='Edit Undo Line BRK',
@@ -54,7 +54,7 @@ class ScoreLayer( Layer ):
     def draw(self):
         super( ScoreLayer, self).draw()
         self.score.element.text = 'Score:%d' % state.score 
-        self.time.element.text = 'time:%d' % state.time
+        self.lives.element.text = 'Lives:%d' % state.lives
         self.farts.element.text = 'Farts:%d' % state.farts
 
         lvl = state.level_idx or 0
