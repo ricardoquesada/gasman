@@ -141,6 +141,7 @@ class GameLayer(cocos.layer.Layer):
         self.points             = []
         self.destroyList        = []
         self.food_places        = []
+        self.bad_guys           = []
         self.deadly_places      = []
         settings = fwSettings
 
@@ -220,6 +221,24 @@ class GameLayer(cocos.layer.Layer):
                     body.SetMassFromShapes()
                     sprite = Sprite('sprites/bean-man.png')
                     self.add( sprite )
+                    body.userData = sprite
+
+                elif value=='bad_guy':
+                    self.bad_guys.append( body )
+                    shape = body.shapeList[0]
+                    sd = box2d.b2CircleDef()
+                    sd.radius = 0.5
+                    sd.friction = shape.friction
+                    sd.restitution = shape.restitution
+                    sd.density = shape.density
+                    body.DestroyShape(shape)
+                    body.CreateShape(sd)
+                    body.SetMassFromShapes()
+
+                    sprite = sqa.SVG_CacheNode()
+                    node= sqa.SVGnode( data.filepath("sprites/badguy-character.svg") )
+                    sprite.add(node)
+                    self.add( sprite)
                     body.userData = sprite
 
                 elif value=='gasman':
