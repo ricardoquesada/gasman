@@ -26,7 +26,8 @@ import levels
 import hiscore
 import gradient_layer
 
-FONT_NAME = "Denne's Aliens"
+FONT_NAME_TITLE = "Gas Huffer Phat"
+FONT_NAME_MENU = "Gas"
 
 COLOR_WHITE = (255,255,255,255)
 class TitleLayer( Layer ):
@@ -37,14 +38,14 @@ class TitleLayer( Layer ):
         self.font_title = {}
 
         # you can override the font that will be used for the title and the items
-        self.font_title['font_name'] = FONT_NAME
+        self.font_title['font_name'] = FONT_NAME_TITLE
         self.font_title['font_size'] = 26
 #        self.font_title['color'] = (204,164,164,255)
         self.font_title['color'] = COLOR_WHITE
         self.font_title['anchor_y'] ='top'
         self.font_title['anchor_x'] ='right'
         title = Label('A SOUND LOVE STORY', **self.font_title )
-        title.position=(w-10,30)
+        title.position=(w-10,34)
         self.add(title,z=1)
 
 #        self.font_title['color'] = COLOR_WHITE
@@ -66,7 +67,7 @@ class ScoresLayer( ColorLayer):
         self.font_title = {}
 
         # you can override the font that will be used for the title and the items
-        self.font_title['font_name'] = FONT_NAME
+        self.font_title['font_name'] = FONT_NAME_TITLE
         self.font_title['font_size'] = 36
 #        self.font_title['color'] = (204,164,164,255)
         self.font_title['color'] = COLOR_WHITE
@@ -92,25 +93,25 @@ class ScoresLayer( ColorLayer):
         self.table =[]
         for idx,s in enumerate(scores):
 
-            pos= Label( '%d:' % (idx+1), font_name=FONT_NAME,
+            pos= Label( '%d:' % (idx+1), font_name=FONT_NAME_MENU,
                         font_size=self.FONT_SIZE,
                         anchor_y='top',
                         anchor_x='left',
                         color=(255,255,255,255) )
 
-            name = Label( s[1], font_name=FONT_NAME,
+            name = Label( s[1], font_name=FONT_NAME_MENU,
                         font_size=self.FONT_SIZE,
                         anchor_y='top',
                         anchor_x='left',
                         color=(255,255,255,255) )
 
-            score = Label( str(s[0]), font_name=FONT_NAME,
+            score = Label( str(s[0]), font_name=FONT_NAME_MENU,
                         font_size=self.FONT_SIZE,
                         anchor_y='top',
                         anchor_x='right',
                         color=(255,255,255,255) )
 
-            lvl = Label( str(s[2]), font_name=FONT_NAME,
+            lvl = Label( str(s[2]), font_name=FONT_NAME_MENU,
                         font_size=self.FONT_SIZE,
                         anchor_y='top',
                         anchor_x='right',
@@ -163,16 +164,16 @@ class OptionsMenu( Menu ):
         self.select_sound = soundex.load('sounds/move.mp3')
 
         # you can override the font that will be used for the title and the items
-        self.font_title['font_name'] = FONT_NAME
+        self.font_title['font_name'] = FONT_NAME_TITLE
         self.font_title['font_size'] = 72
 #        self.font_title['color'] = (204,164,164,255)
         self.font_title['color'] = COLOR_WHITE
 
 
-        self.font_item['font_name'] = FONT_NAME 
+        self.font_item['font_name'] = FONT_NAME_MENU
         self.font_item['color'] = COLOR_WHITE
         self.font_item['font_size'] = 32
-        self.font_item_selected['font_name'] = FONT_NAME
+        self.font_item_selected['font_name'] = FONT_NAME_MENU
         self.font_item_selected['color'] = COLOR_WHITE
         self.font_item_selected['font_size'] = 46
 
@@ -244,15 +245,15 @@ class MainMenu( Menu ):
         # you can override the font that will be used for the title and the items
         # you can also override the font size and the colors. see menu.py for
         # more info
-        self.font_title['font_name'] = FONT_NAME
+        self.font_title['font_name'] = FONT_NAME_TITLE
         self.font_title['font_size'] = 72
 #        self.font_title['color'] = (204,164,164,255)
         self.font_title['color'] = COLOR_WHITE
 
-        self.font_item['font_name'] = FONT_NAME
+        self.font_item['font_name'] = FONT_NAME_MENU
         self.font_item['color'] = COLOR_WHITE
         self.font_item['font_size'] = 32
-        self.font_item_selected['font_name'] = FONT_NAME
+        self.font_item_selected['font_name'] = FONT_NAME_MENU
         self.font_item_selected['color'] = COLOR_WHITE
         self.font_item_selected['font_size'] = 46
 

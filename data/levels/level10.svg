@@ -15,9 +15,285 @@
    version="1.1"
    inkscape:version="0.47pre1 r21720"
    sodipodi:docname="level10.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/Users/riq/progs/pedoman/data/levels/level10.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs2824">
+    <pattern
+       inkscape:stockid="Polka dots, medium white"
+       id="Polkadots-medwhite"
+       patternTransform="translate(0,0) scale(10,10)"
+       height="10"
+       width="10"
+       patternUnits="userSpaceOnUse"
+       inkscape:collect="always">
+      <circle
+         id="circle5062"
+         r="0.15"
+         cy="0.810"
+         cx="2.567"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5064"
+         r="0.15"
+         cy="2.33"
+         cx="3.048"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5066"
+         r="0.15"
+         cy="2.415"
+         cx="4.418"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5068"
+         r="0.15"
+         cy="3.029"
+         cx="1.844"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5070"
+         r="0.15"
+         cy="1.363"
+         cx="6.08"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5072"
+         r="0.15"
+         cy="4.413"
+         cx="5.819"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5074"
+         r="0.15"
+         cy="4.048"
+         cx="4.305"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5076"
+         r="0.15"
+         cy="3.045"
+         cx="5.541"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5078"
+         r="0.15"
+         cy="5.527"
+         cx="4.785"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5080"
+         r="0.15"
+         cy="5.184"
+         cx="2.667"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5082"
+         r="0.15"
+         cy="1.448"
+         cx="7.965"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5084"
+         r="0.15"
+         cy="5.049"
+         cx="7.047"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5086"
+         r="0.15"
+         cy="0.895"
+         cx="4.340"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5088"
+         r="0.15"
+         cy="0.340"
+         cx="7.125"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5090"
+         r="0.15"
+         cy="1.049"
+         cx="9.553"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5092"
+         r="0.15"
+         cy="2.689"
+         cx="7.006"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5094"
+         r="0.15"
+         cy="2.689"
+         cx="8.909"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5096"
+         r="0.15"
+         cy="4.407"
+         cx="9.315"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5098"
+         r="0.15"
+         cy="3.870"
+         cx="7.820"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5100"
+         r="0.15"
+         cy="5.948"
+         cx="8.270"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5102"
+         r="0.15"
+         cy="7.428"
+         cx="7.973"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5104"
+         r="0.15"
+         cy="8.072"
+         cx="9.342"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5106"
+         r="0.15"
+         cy="9.315"
+         cx="8.206"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5108"
+         r="0.15"
+         cy="9.475"
+         cx="9.682"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5110"
+         r="0.15"
+         cy="6.186"
+         cx="9.688"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5112"
+         r="0.15"
+         cy="6.296"
+         cx="3.379"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5114"
+         r="0.15"
+         cy="8.204"
+         cx="2.871"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5116"
+         r="0.15"
+         cy="8.719"
+         cx="4.59"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5118"
+         r="0.15"
+         cy="9.671"
+         cx="3.181"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5120"
+         r="0.15"
+         cy="7.315"
+         cx="5.734"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5122"
+         r="0.15"
+         cy="6.513"
+         cx="6.707"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5124"
+         r="0.15"
+         cy="9.670"
+         cx="5.730"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5126"
+         r="0.15"
+         cy="8.373"
+         cx="6.535"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5128"
+         r="0.15"
+         cy="7.154"
+         cx="4.37"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5130"
+         r="0.15"
+         cy="7.25"
+         cx="0.622"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5132"
+         r="0.15"
+         cy="5.679"
+         cx="0.831"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5134"
+         r="0.15"
+         cy="8.519"
+         cx="1.257"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5136"
+         r="0.15"
+         cy="6.877"
+         cx="1.989"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5138"
+         r="0.15"
+         cy="3.181"
+         cx="0.374"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5140"
+         r="0.15"
+         cy="1.664"
+         cx="1.166"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5142"
+         r="0.15"
+         cy="0.093"
+         cx="1.151"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5144"
+         r="0.15"
+         cy="10.093"
+         cx="1.151"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5146"
+         r="0.15"
+         cy="4.451"
+         cx="1.302"
+         style="fill:white;stroke:none" />
+      <circle
+         id="circle5148"
+         r="0.15"
+         cy="3.763"
+         cx="3.047"
+         style="fill:white;stroke:none" />
+    </pattern>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
        inkscape:vp_x="0 : 300 : 1"
@@ -34,8 +310,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="363.87731"
-     inkscape:cy="132.04225"
+     inkscape:cx="377.87731"
+     inkscape:cy="252.04225"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -52,7 +328,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -60,14 +336,14 @@
      inkscape:label="physics:static"
      inkscape:groupmode="layer"
      id="layer1"
-     style="display:inline">
+     style="display:none">
     <rect
-       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:6.91718578;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ffac00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:2.9002862;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2878"
-       width="24.082815"
-       height="595.08282"
-       x="-0.041407339"
-       y="-0.041398339" />
+       width="24.333799"
+       height="496.33377"
+       x="1.4501431"
+       y="102.21609" />
     <path
        sodipodi:type="arc"
        style="fill:#00ff00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -77,7 +353,7 @@
        sodipodi:rx="27.5"
        sodipodi:ry="30"
        d="m 278,372 a 27.5,30 0 1 1 -55,0 27.5,30 0 1 1 55,0 z"
-       transform="matrix(0.11853075,0,0,0.10865319,305.35135,378.53771)"
+       transform="matrix(0.11853075,0,0,0.10865319,267.35135,479.53771)"
        game_data="sprite=food" />
     <path
        sodipodi:type="arc"
@@ -89,7 +365,7 @@
        sodipodi:ry="15"
        d="m 315,402 a 13,15 0 1 1 -26,0 13,15 0 1 1 26,0 z"
        game_data="sprite=food"
-       transform="matrix(0.2311751,0,0,0.20035175,192.22843,328.41529)" />
+       transform="matrix(0.2311751,0,0,0.20035175,174.22843,434.41529)" />
     <path
        sodipodi:type="arc"
        style="fill:#00ff00;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -100,7 +376,7 @@
        sodipodi:ry="13"
        d="m 399,440 a 11,13 0 1 1 -22,0 11,13 0 1 1 22,0 z"
        game_data="sprite=food"
-       transform="matrix(0.26642076,0,0,0.22543296,97.67205,310.7662)" />
+       transform="matrix(0.26642076,0,0,0.22543296,84.67205,420.7662)" />
     <path
        sodipodi:type="arc"
        style="fill:#ff00ff;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -111,46 +387,94 @@
        sodipodi:ry="28"
        d="m 647,340 a 26.5,28 0 1 1 -53,0 26.5,28 0 1 1 53,0 z"
        game_data="sprite=gaswoman"
-       transform="matrix(0.89865538,0,0,0.85051312,158.88434,-21.67446)"
-       physics_shape="restitution=1" />
+       transform="matrix(0.89865538,0,0,0.85051312,52.88434,-163.67446)" />
     <rect
-       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:7.43152761;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="rect3133"
-       width="806.56854"
-       height="31.568472"
-       x="-2.784229"
-       y="608.21576"
-       game_data="sprite=game_over"
-       physics_shape="isSensor=True" />
-    <rect
-       style="fill:#ff7f2a;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:1.06439221;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ff7f2a;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2841"
-       width="130.93561"
-       height="12.935607"
-       x="658.03223"
-       y="448.0322" />
+       width="128.84535"
+       height="37.845352"
+       x="643.07733"
+       y="451.07733" />
     <rect
-       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:0.93471348;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2999"
-       width="458.06528"
-       height="20.065287"
-       x="22.967358"
-       y="451.96735" />
+       width="457.37683"
+       height="30.376842"
+       x="1.5"
+       y="568.12317" />
     <rect
-       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="rect3001"
-       width="17"
-       height="698"
-       x="809"
-       y="-102"
-       game_data="sprite=game_over"
-       physics_shape="isSensor=True" />
+       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect6815"
+       width="31.438229"
+       height="597.43823"
+       x="766.78088"
+       y="1.0617676" />
+    <rect
+       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect6817"
+       width="236"
+       height="32"
+       x="95.077332"
+       y="712.40582"
+       transform="matrix(0.86577087,-0.50044061,0.50044061,0.86577087,0,0)" />
+    <rect
+       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect6819"
+       width="301"
+       height="29"
+       x="16"
+       y="290" />
+    <rect
+       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:2.72961903;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect6821"
+       width="178.27039"
+       height="35.270382"
+       x="428.86481"
+       y="329.86481" />
+    <rect
+       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3.25989246;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect6823"
+       width="128.64896"
+       height="28.22298"
+       x="678.21686"
+       y="-105.05039"
+       transform="matrix(0.91753233,0.3976612,-0.33202863,0.94326931,0,0)" />
+    <rect
+       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:2.75376582;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect6825"
+       width="172.24623"
+       height="32.246235"
+       x="149.87688"
+       y="145.87688" />
+    <rect
+       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect6827"
+       width="239"
+       height="33"
+       x="423"
+       y="171" />
+    <rect
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect6835"
+       width="707"
+       height="26"
+       x="66"
+       y="-68"
+       game_data="sprite=game_over" />
+    <rect
+       style="fill:#ff6600;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect6837"
+       width="139"
+       height="23"
+       x="-64.636948"
+       y="74.655968"
+       transform="matrix(0.72923127,-0.68426731,0.68426731,0.72923127,0,0)" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="physics:dynamic"
-     style="display:inline">
+     style="display:none">
     <path
        sodipodi:type="arc"
        style="fill:#000080;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -160,7 +484,30 @@
        sodipodi:rx="31"
        sodipodi:ry="29.5"
        d="m 665,152.5 a 31,29.5 0 1 1 -62,0 31,29.5 0 1 1 62,0 z"
-       transform="matrix(0.72876783,0.28593254,-0.27549502,0.75637823,-329.79265,118.91711)"
+       transform="matrix(0.72876783,0.28593254,-0.27549502,0.75637823,-333.79265,220.91711)"
        game_data="sprite=gasman" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path6829"
+       sodipodi:cx="373.5"
+       sodipodi:cy="125"
+       sodipodi:rx="31.5"
+       sodipodi:ry="32"
+       d="m 405,125 a 31.5,32 0 1 1 -63,0 31.5,32 0 1 1 63,0 z"
+       transform="translate(-6,0)"
+       game_data="sprite=bad_guy"
+       physics_shape="restitution=1" />
+  </g>
+  <g
+     style="display:inline"
+     id="g6839"
+     inkscape:groupmode="layer"
+     inkscape:label="graphics">
+    <path
+       style="fill:url(#Polkadots-medwhite);fill-opacity:1;fill-rule:nonzero;stroke:#0c0c0c;stroke-width:2.9002862;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 766.78125,1.0625 0,217.0625 -108.75,-47.125 -0.875,-0.375 -0.125,0.375 L 423,171 l 6,27 233,6 0,-0.625 103.84375,45 0.9375,-2.65625 0,205.34375 -123.71875,0 0,0.0937 -202.375,116.96875 -414.90625,0 0,-249.125 280.21875,0 11,-29 -291.21875,0 0,-180.28125 L 121.0625,20.3437 105.3125,3.5625 0,5.656 l 1.4375,592.9065 24.34375,0 0,-0.0625 772.4375,0 0,-597.4375 -31.4375,0 z M 150,146 l -1,32 174,1 1,-32 -174,-1 z m 280,220 -3,-37 179,0 0,35 -176,2 z"
+       id="rect6841"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccc" />
   </g>
 </svg>

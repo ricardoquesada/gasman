@@ -9,6 +9,7 @@ from pyglet.gl import *
 from state import state
 import levels
 
+FONT_NAME = 'Gas'
 class ScoreLayer( Layer ): 
     def __init__(self):
         w,h = director.get_window_size()
@@ -20,7 +21,7 @@ class ScoreLayer( Layer ):
         self.position = (0,h-48)
 
         self.score=  Label('Score:', font_size=36,
-                font_name='Edit Undo Line BRK',
+                font_name=FONT_NAME,
                 color=(255,255,255,255),
                 anchor_x='left',
                 anchor_y='bottom')
@@ -28,7 +29,7 @@ class ScoreLayer( Layer ):
         self.add( self.score)
 
         self.farts = Label('Farts:', font_size=36,
-                font_name='Edit Undo Line BRK',
+                font_name=FONT_NAME,
                 color=(255,255,255,255),
                 anchor_x='left',
                 anchor_y='bottom')
@@ -36,7 +37,7 @@ class ScoreLayer( Layer ):
         self.add( self.farts)
 
         self.lives= Label('Lives:', font_size=36,
-                font_name='Edit Undo Line BRK',
+                font_name=FONT_NAME,
                 color=(255,255,255,255),
                 anchor_x='left',
                 anchor_y='bottom')
@@ -44,7 +45,7 @@ class ScoreLayer( Layer ):
         self.add( self.lives)
 
         self.lvl=  Label('Lvl:', font_size=36,
-                font_name='Edit Undo Line BRK',
+                font_name=FONT_NAME,
                 color=(255,255,255,255),
                 anchor_x='left',
                 anchor_y='bottom')
@@ -68,15 +69,15 @@ class MessageLayer( Layer ):
 
         self.msg = Label( msg,
             font_size=42,
-            font_name='Edit Undo Line BRK',
-            color=(64,64,64,255),
+            font_name=FONT_NAME,
+            color=(128,128,128,255),
             anchor_y='center',
             anchor_x='center' )
         self.msg.position=(w/2.0, h)
 
         self.msg2 = Label( msg,
             font_size=42,
-            font_name='Edit Undo Line BRK',
+            font_name=FONT_NAME,
             color=(255,255,255,255),
             anchor_y='center',
             anchor_x='center' )

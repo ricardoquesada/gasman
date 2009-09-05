@@ -7,7 +7,7 @@ import math
 
 from xml.dom.minidom import parse, parseString
 
-DEFAULT_FRICTION = 1
+DEFAULT_FRICTION = 2
 DEFAULT_RESTITUTION = 0.2
 DEFAULT_DENSITY = 1
 
@@ -201,14 +201,13 @@ class SVGBox2dParser( object ):
             return False
 
         # then it is a float or a int (string is not supported)
-        f = float( value )
-        i = int (value )
-
-        # integer ?
-        if f == i:
-            return i
-        # nope, float
-        return f
+        try:
+            ret = int (value )
+        except ValueError, e:
+            # can't cast ?
+            # then it is an integer
+            ret = float(value)
+        return ret
 
     def apply_physics_properties_to_shape( self, node, shape ):
 

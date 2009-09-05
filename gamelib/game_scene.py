@@ -34,7 +34,7 @@ from settings import fwSettings
 import gradient_layer
 
 PTM_RATIO = 52
-TORQUE_FORCE = 17
+TORQUE_FORCE = 12
 JUMP_IMPULSE = 8
 
 class GameLayer(cocos.layer.Layer):
@@ -113,6 +113,8 @@ class GameLayer(cocos.layer.Layer):
         self.sounds_farts.append( soundex.load('sounds/fart_10.mp3') )
         self.sounds_farts.append( soundex.load('sounds/fart_11.mp3') )
         self.sounds_level_complete = soundex.load('sounds/level_complete_01.mp3')
+        self.sounds_ouch = soundex.load('sounds/ouch_01.wav')
+        self.sounds_argh = soundex.load('sounds/scream_01.mp3')
 
         soundex.set_music('music_01.mp3')
         soundex.play_music()
@@ -363,6 +365,8 @@ class GameLayer(cocos.layer.Layer):
                 self.collision_gasman_gaswoman()
             elif ( self.gasman_body in pair and (body1 in self.deadly_places or body2 in self.deadly_places ) ):
                 self.collision_gasman_deadly()
+            elif ( self.gasman_body in pair and (body1 in self.bad_guys or body2 in self.bad_guys ) ):
+                self.collision_gasman_badguy()
 
     def collision_gasman_gaswoman( self ):
         if self.state.state == state.STATE_PLAY:
@@ -374,12 +378,23 @@ class GameLayer(cocos.layer.Layer):
 
     def collision_gasman_deadly( self ):
         if self.state.state == state.STATE_PLAY:
+            self.sounds_argh.play()
             self.state.lives -= 1
             if self.state.lives == 0:
                 self.state.state = state.STATE_OVER
                 self.parent.add( gameover.GameOver( win=False) , z=10 )
             else:
-                self.level_restart()
+                self.level_replay()
+
+    def collision_gasman_badguy( self ):
+        if self.state.state == state.STATE_PLAY:
+            self.sounds_ouch.play()
+            self.state.lives -= 1
+            if self.state.lives == 0:
+                self.state.state = state.STATE_OVER
+                self.parent.add( gameover.GameOver( win=False) , z=10 )
+            else:
+                self.level_replay()
 
     def food_eat( self, body1, body2 ):
         shape = self.gasman_body.shapeList[0]
@@ -527,6 +542,10 @@ class GameLayer(cocos.layer.Layer):
         gameModel = GameLayer()
         gameModel.HUD_delegate = hud
         scene.add( gameModel, z=1, name='ctrl')
+
+    def level_replay( self ):
+        state.replay()
+        self.level_new()
 
     def level_restart( self ):
         state.reset()
